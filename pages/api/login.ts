@@ -9,7 +9,7 @@ export type IUser = {
   name: string;
   created_at: string;
   updated_at: string;
-}
+};
 
 export type ResponseLoginData = {
   token: {
@@ -18,8 +18,6 @@ export type ResponseLoginData = {
   };
   user: IUser[];
 };
-
-
 
 const API_URL = "https://plataforma-algetec-back-dev.grupoa.education/api";
 

@@ -1,8 +1,8 @@
 import { AuthBindings } from "@refinedev/core";
 import axios from "axios";
 import nookies from "nookies";
-import {IUser, ResponseLoginData} from "pages/api/login";
-import {axiosInstance} from "./rest-data-provider/utils";
+import { IUser, ResponseLoginData } from "pages/api/login";
+import { axiosInstance } from "./rest-data-provider/utils";
 
 export const authProvider: AuthBindings = {
   login: async ({ email, password }) => {
