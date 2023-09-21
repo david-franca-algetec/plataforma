@@ -18,4 +18,3 @@ export const mapOperator = (operator: CrudOperators): string => {
       return "";
   }
 };
-
