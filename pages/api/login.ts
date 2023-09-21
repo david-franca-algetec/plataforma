@@ -1,5 +1,5 @@
-import { log } from "console";
 import type { NextApiRequest, NextApiResponse } from "next";
+import { API_URL } from "src/constants";
 
 export type IUser = {
   id: number;
@@ -9,7 +9,7 @@ export type IUser = {
   name: string;
   created_at: string;
   updated_at: string;
-}
+};
 
 export type ResponseLoginData = {
   token: {
@@ -18,10 +18,6 @@ export type ResponseLoginData = {
   };
   user: IUser[];
 };
-
-
-
-const API_URL = "https://plataforma-algetec-back-dev.grupoa.education/api";
 
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
   // Check the email and password match
@@ -40,7 +36,6 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
     .then(async (response) => {
       const data: ResponseLoginData = await response.json();
       if (response.ok) {
-        log(data);
         res.status(200).json(data);
       } else {
         // Handle error

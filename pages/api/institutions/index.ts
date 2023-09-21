@@ -1,7 +1,6 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import nookies from "nookies";
-
-const API_URL = "https://plataforma-algetec-back-dev.grupoa.education/api";
+import { API_URL } from "src/constants";
 
 export type Institution = {
   id: number;
@@ -40,7 +39,7 @@ function sortByDate(a: string | number, b: string | number) {
   return 0;
 }
 
-export const getInstitutions = async (req: NextApiRequest, res: NextApiResponse, token: string) => {
+export const getInstitutions = (req: NextApiRequest, res: NextApiResponse, token: string) => {
   const { _order, _sort, name_like } = req.query;
 
   fetch(`${API_URL}/institutions/all`, {
@@ -110,7 +109,7 @@ export const getInstitutions = async (req: NextApiRequest, res: NextApiResponse,
     });
 };
 
-export const createInstitution = async (req: NextApiRequest, res: NextApiResponse, token: string) => {
+export const createInstitution = (req: NextApiRequest, res: NextApiResponse, token: string) => {
   const { name } = req.body;
   const body = {
     name,
@@ -137,7 +136,7 @@ export const createInstitution = async (req: NextApiRequest, res: NextApiRespons
     });
 };
 
-export default async function handler(req: NextApiRequest, res: NextApiResponse<ResponseData>) {
+export default function handler(req: NextApiRequest, res: NextApiResponse<ResponseData>) {
   const token = nookies.get({ req }).token;
 
   if (req.method === "GET") {
