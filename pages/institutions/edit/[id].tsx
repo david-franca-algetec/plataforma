@@ -19,7 +19,7 @@ const InstitutionEdit: React.FC<IResourceComponentsProps> = () => {
 
   return (
     <Edit isLoading={formLoading} saveButtonProps={saveButtonProps}>
-      <FormControl mb="3" isInvalid={!!(errors as any)?.id}>
+      <FormControl mb="3" isInvalid={Boolean((errors as any)?.id)}>
         <FormLabel>{translate("institutions.fields.id")}</FormLabel>
         <Input
           disabled
@@ -31,7 +31,7 @@ const InstitutionEdit: React.FC<IResourceComponentsProps> = () => {
         />
         <FormErrorMessage>{(errors as any)?.id?.message as string}</FormErrorMessage>
       </FormControl>
-      <FormControl mb="3" isInvalid={!!(errors as any)?.name}>
+      <FormControl mb="3" isInvalid={Boolean((errors as any)?.name)}>
         <FormLabel>{translate("institutions.fields.name")}</FormLabel>
         <Input
           type="text"

@@ -95,7 +95,7 @@ const BlogPostList: FC<IResourceComponentsProps> = () => {
     resource: "categories",
     ids: tableData?.data?.map((item) => item?.category?.id) ?? [],
     queryOptions: {
-      enabled: !!tableData?.data,
+      enabled: Boolean(tableData?.data),
     },
   });
 

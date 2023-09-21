@@ -55,7 +55,7 @@ export const ColumnFilter: FC<{ column: Column<any, any> }> = ({ column }) => {
   const renderFilterElement = () => {
     const FilterComponent = (column.columnDef?.meta as any)?.filterElement;
 
-    if (!FilterComponent && !!state) {
+    if (!FilterComponent && Boolean(state)) {
       return <Input borderRadius="md" size="sm" autoComplete="off" value={state.value} onChange={change} />;
     }
 
@@ -63,7 +63,7 @@ export const ColumnFilter: FC<{ column: Column<any, any> }> = ({ column }) => {
   };
 
   return (
-    <Menu isOpen={!!state} onClose={close}>
+    <Menu isOpen={Boolean(state)} onClose={close}>
       <MenuButton
         onClick={open}
         as={IconButton}
@@ -73,7 +73,7 @@ export const ColumnFilter: FC<{ column: Column<any, any> }> = ({ column }) => {
         size="xs"
       />
       <MenuList p="2">
-        {!!state && (
+        {Boolean(state) && (
           <VStack align="flex-start">
             {renderFilterElement()}
             <HStack spacing="1">

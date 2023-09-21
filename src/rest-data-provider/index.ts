@@ -49,7 +49,7 @@ export const dataProvider = (
       }
     );
 
-    const total = +headers["x-total-count"];
+    const total = Number(headers["x-total-count"]);
 
     return {
       data,
