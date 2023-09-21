@@ -132,7 +132,7 @@ const InstitutionsList: FC<IResourceComponentsProps> = () => {
 
 export default InstitutionsList;
 
-export const getServerSideProps: GetServerSideProps<{}> = async (context) => {
+export const getServerSideProps: GetServerSideProps = async (context) => {
   const { authenticated, redirectTo } = await authProvider.check(context);
 
   const translateProps = await serverSideTranslations(context.locale ?? "en", ["common"]);

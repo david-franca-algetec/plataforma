@@ -1,24 +1,19 @@
-import {GetServerSideProps} from "next";
-import {authProvider} from "../../../src/authProvider";
-import {serverSideTranslations} from "next-i18next/serverSideTranslations";
+import { GetServerSideProps } from "next";
+import { authProvider } from "../../../src/authProvider";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { IResourceComponentsProps, useTranslate } from "@refinedev/core";
 import { Create } from "@refinedev/chakra-ui";
-import {
-  FormControl,
-  FormLabel,
-  FormErrorMessage,
-  Input,
-} from "@chakra-ui/react";
+import { FormControl, FormLabel, FormErrorMessage, Input } from "@chakra-ui/react";
 import { useForm } from "@refinedev/react-hook-form";
-import {FC} from "react";
+import { FC } from "react";
 
 const InstitutionCreate: FC<IResourceComponentsProps> = () => {
   const translate = useTranslate();
   const {
-    refineCore: {formLoading},
+    refineCore: { formLoading },
     saveButtonProps,
     register,
-    formState: {errors},
+    formState: { errors },
   } = useForm();
 
   return (
@@ -31,9 +26,7 @@ const InstitutionCreate: FC<IResourceComponentsProps> = () => {
             required: "This field is required",
           })}
         />
-        <FormErrorMessage>
-          {(errors as any)?.name?.message as string}
-        </FormErrorMessage>
+        <FormErrorMessage>{(errors as any)?.name?.message as string}</FormErrorMessage>
       </FormControl>
     </Create>
   );
@@ -41,12 +34,10 @@ const InstitutionCreate: FC<IResourceComponentsProps> = () => {
 
 export default InstitutionCreate;
 
-export const getServerSideProps: GetServerSideProps<{}> = async (context) => {
+export const getServerSideProps: GetServerSideProps = async (context) => {
   const { authenticated, redirectTo } = await authProvider.check(context);
 
-  const translateProps = await serverSideTranslations(context.locale ?? "en", [
-    "common",
-  ]);
+  const translateProps = await serverSideTranslations(context.locale ?? "en", ["common"]);
 
   if (!authenticated) {
     return {

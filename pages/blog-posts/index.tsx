@@ -1,14 +1,14 @@
-import React, {FC, useMemo} from "react";
-import {GetManyResponse, IResourceComponentsProps, useMany, useTranslate,} from "@refinedev/core";
-import {useTable} from "@refinedev/react-table";
-import {ColumnDef, flexRender} from "@tanstack/react-table";
-import {DateField, DeleteButton, EditButton, List, MarkdownField, ShowButton,} from "@refinedev/chakra-ui";
-import {HStack, Table, TableContainer, Tbody, Td, Th, Thead, Tr,} from "@chakra-ui/react";
-import {serverSideTranslations} from "next-i18next/serverSideTranslations";
+import React, { FC, useMemo } from "react";
+import { GetManyResponse, IResourceComponentsProps, useMany, useTranslate } from "@refinedev/core";
+import { useTable } from "@refinedev/react-table";
+import { ColumnDef, flexRender } from "@tanstack/react-table";
+import { DateField, DeleteButton, EditButton, List, MarkdownField, ShowButton } from "@refinedev/chakra-ui";
+import { HStack, Table, TableContainer, Tbody, Td, Th, Thead, Tr } from "@chakra-ui/react";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
-import {GetServerSideProps} from "next";
-import {authProvider} from "../../src/authProvider";
-import {Pagination} from "@components/pagination";
+import { GetServerSideProps } from "next";
+import { authProvider } from "../../src/authProvider";
+import { Pagination } from "@components/pagination";
 
 const BlogPostList: FC<IResourceComponentsProps> = () => {
   const translate = useTranslate();
@@ -28,26 +28,20 @@ const BlogPostList: FC<IResourceComponentsProps> = () => {
         id: "content",
         accessorKey: "content",
         header: translate("blog_posts.fields.content"),
-        cell: function render({getValue}) {
-          return (
-            <MarkdownField
-              value={getValue<string>()?.slice(0, 80) + "..."}
-            />
-          );
+        cell: function render({ getValue }) {
+          return <MarkdownField value={getValue<string>()?.slice(0, 80) + "..."} />;
         },
       },
       {
         id: "category",
         header: translate("blog_posts.fields.category"),
         accessorKey: "category.id",
-        cell: function render({getValue, table}) {
+        cell: function render({ getValue, table }) {
           const meta = table.options.meta as {
             categoryData: GetManyResponse;
           };
 
-          const category = meta.categoryData?.data?.find(
-            (item) => item.id == getValue<any>(),
-          );
+          const category = meta.categoryData?.data?.find((item) => item.id == getValue<any>());
 
           return category?.title ?? "Loading...";
         },
@@ -61,35 +55,26 @@ const BlogPostList: FC<IResourceComponentsProps> = () => {
         id: "createdAt",
         accessorKey: "createdAt",
         header: translate("blog_posts.fields.createdAt"),
-        cell: function render({getValue}) {
-          return <DateField value={getValue<any>()}/>;
+        cell: function render({ getValue }) {
+          return <DateField value={getValue<any>()} />;
         },
       },
       {
         id: "actions",
         accessorKey: "id",
         header: "Actions",
-        cell: function render({getValue}) {
+        cell: function render({ getValue }) {
           return (
             <HStack>
-              <ShowButton
-                hideText
-                recordItemId={getValue() as string}
-              />
-              <EditButton
-                hideText
-                recordItemId={getValue() as string}
-              />
-              <DeleteButton
-                hideText
-                recordItemId={getValue() as string}
-              />
+              <ShowButton hideText recordItemId={getValue() as string} />
+              <EditButton hideText recordItemId={getValue() as string} />
+              <DeleteButton hideText recordItemId={getValue() as string} />
             </HStack>
           );
         },
       },
     ],
-    [translate],
+    [translate]
   );
 
   const {
@@ -100,13 +85,13 @@ const BlogPostList: FC<IResourceComponentsProps> = () => {
       setCurrent,
       pageCount,
       current,
-      tableQueryResult: {data: tableData},
+      tableQueryResult: { data: tableData },
     },
   } = useTable({
     columns,
   });
 
-  const {data: categoryData} = useMany({
+  const { data: categoryData } = useMany({
     resource: "categories",
     ids: tableData?.data?.map((item) => item?.category?.id) ?? [],
     queryOptions: {
@@ -131,11 +116,7 @@ const BlogPostList: FC<IResourceComponentsProps> = () => {
               <Tr key={headerGroup.id}>
                 {headerGroup.headers.map((header) => (
                   <Th key={header.id}>
-                    {!header.isPlaceholder &&
-                      flexRender(
-                        header.column.columnDef.header,
-                        header.getContext(),
-                      )}
+                    {!header.isPlaceholder && flexRender(header.column.columnDef.header, header.getContext())}
                   </Th>
                 ))}
               </Tr>
@@ -145,35 +126,24 @@ const BlogPostList: FC<IResourceComponentsProps> = () => {
             {getRowModel().rows.map((row) => (
               <Tr key={row.id}>
                 {row.getVisibleCells().map((cell) => (
-                  <Td key={cell.id}>
-                    {flexRender(
-                      cell.column.columnDef.cell,
-                      cell.getContext(),
-                    )}
-                  </Td>
+                  <Td key={cell.id}>{flexRender(cell.column.columnDef.cell, cell.getContext())}</Td>
                 ))}
               </Tr>
             ))}
           </Tbody>
         </Table>
       </TableContainer>
-      <Pagination
-        current={current}
-        pageCount={pageCount}
-        setCurrent={setCurrent}
-      />
+      <Pagination current={current} pageCount={pageCount} setCurrent={setCurrent} />
     </List>
   );
 };
 
 export default BlogPostList;
 
-export const getServerSideProps: GetServerSideProps<{}> = async (context) => {
+export const getServerSideProps: GetServerSideProps = async (context) => {
   const { authenticated, redirectTo } = await authProvider.check(context);
 
-  const translateProps = await serverSideTranslations(context.locale ?? "en", [
-    "common",
-  ]);
+  const translateProps = await serverSideTranslations(context.locale ?? "en", ["common"]);
 
   if (!authenticated) {
     return {
@@ -193,3 +163,4 @@ export const getServerSideProps: GetServerSideProps<{}> = async (context) => {
     },
   };
 };
+

@@ -10,12 +10,10 @@ export default function ForgotPassword() {
 
 ForgotPassword.noLayout = true;
 
-export const getServerSideProps: GetServerSideProps<{}> = async (context) => {
+export const getServerSideProps: GetServerSideProps = async (context) => {
   const { authenticated, redirectTo } = await authProvider.check(context);
 
-  const translateProps = await serverSideTranslations(context.locale ?? "en", [
-    "common",
-  ]);
+  const translateProps = await serverSideTranslations(context.locale ?? "en", ["common"]);
 
   if (authenticated) {
     return {
@@ -33,3 +31,4 @@ export const getServerSideProps: GetServerSideProps<{}> = async (context) => {
     },
   };
 };
+
