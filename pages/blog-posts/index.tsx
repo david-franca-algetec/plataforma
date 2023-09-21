@@ -74,7 +74,7 @@ const BlogPostList: FC<IResourceComponentsProps> = () => {
         },
       },
     ],
-    [translate]
+    [translate],
   );
 
   const {
