@@ -100,4 +100,3 @@ export const authProvider: AuthBindings = {
     return { error };
   },
 };
-
