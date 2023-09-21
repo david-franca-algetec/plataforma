@@ -96,7 +96,7 @@ const InstitutionsList: FC<IResourceComponentsProps> = () => {
         },
       },
     ],
-    [translate]
+    [translate],
   );
 
   const { data: institutionsData } = useList<IInstitution[], HttpError>({
