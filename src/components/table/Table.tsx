@@ -7,12 +7,12 @@ import { ColumnDef, flexRender } from "@tanstack/react-table";
 import { Pagination } from "@components/pagination";
 import type { GetListResponse } from "@refinedev/core";
 
-interface TableChakraProps {
-  data?: GetListResponse<any[]>;
-  columns: ColumnDef<any>[];
-}
+type TableChakraProps<D extends object> = {
+  data?: GetListResponse<D[]>;
+  columns: ColumnDef<D>[];
+};
 
-export function TableChakra({ columns, data }: TableChakraProps) {
+export function TableChakra<D extends object>({ columns, data }: TableChakraProps<D>) {
   const {
     getHeaderGroups,
     getRowModel,

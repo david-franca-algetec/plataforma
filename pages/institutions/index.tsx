@@ -107,9 +107,9 @@ const InstitutionsList: FC<IResourceComponentsProps> = () => {
     mapData: (item) => {
       return {
         ID: item.id,
-        Nome: item.name,
-        "Criado em": item.created_at,
-        "Atualizado em": item.updated_at,
+        [`${translate("institutions.fields.name").replace(" ", "_")}`]: item.name,
+        [`${translate("institutions.fields.created_at").replace(" ", "_")}`]: item.created_at,
+        [`${translate("institutions.fields.updated_at").replace(" ", "_")}`]: item.updated_at,
       };
     },
     pageSize: 10,

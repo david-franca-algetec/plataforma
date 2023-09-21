@@ -3,7 +3,11 @@ import { HStack, IconButton, Input, Menu, MenuButton, MenuList, VStack } from "@
 import { IconCheck, IconFilter, IconX } from "@tabler/icons";
 import type { Column } from "@tanstack/react-table";
 
-export const ColumnFilter: FC<{ column: Column<any, any> }> = ({ column }) => {
+type Props<D extends object> = {
+  column: Column<D>;
+};
+
+export const ColumnFilter = <D extends object>({ column }: Props<D>) => {
   const [state, setState] = useState(null as null | { value: any });
 
   if (!column.getCanFilter()) {
