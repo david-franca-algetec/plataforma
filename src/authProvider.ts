@@ -67,7 +67,7 @@ export const authProvider: AuthBindings = {
   },
   check: async (ctx: any) => {
     const cookies = nookies.get(ctx);
-    if (cookies["auth"]) {
+    if (cookies.auth) {
       return {
         authenticated: true,
       };
@@ -80,7 +80,7 @@ export const authProvider: AuthBindings = {
     };
   },
   getPermissions: async () => {
-    const auth = nookies.get()["auth"];
+    const auth = nookies.get().auth;
     if (auth) {
       const parsedUser: IUser = JSON.parse(auth);
       return parsedUser.role_id;
@@ -88,7 +88,7 @@ export const authProvider: AuthBindings = {
     return null;
   },
   getIdentity: async () => {
-    const auth = nookies.get()["auth"];
+    const auth = nookies.get().auth;
     if (auth) {
       const parsedUser: IUser = JSON.parse(auth);
       return parsedUser;
@@ -100,4 +100,3 @@ export const authProvider: AuthBindings = {
     return { error };
   },
 };
-
