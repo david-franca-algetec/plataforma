@@ -18,4 +18,3 @@ export const generateSort = (sorters?: CrudSorting) => {
 
   return;
 };
-
