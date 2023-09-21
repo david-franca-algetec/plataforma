@@ -6,9 +6,15 @@ import { stringify } from "query-string";
 type MethodTypes = "get" | "delete" | "head" | "options";
 type MethodTypesWithBody = "post" | "put" | "patch";
 
+/**
+ * A data provider function that returns an object with methods for interacting with a REST API.
+ * @param apiUrl - The base URL of the REST API.
+ * @param httpClient - An optional AxiosInstance to use for HTTP requests. Defaults to axiosInstance.
+ * @returns An object with methods for interacting with the REST API.
+ */
 export const dataProvider = (
   apiUrl: string,
-  httpClient: AxiosInstance = axiosInstance,
+  httpClient: AxiosInstance = axiosInstance
 ): Omit<Required<DataProvider>, "createMany" | "updateMany" | "deleteMany"> => ({
   getList: async ({ resource, pagination, filters, sorters, meta }) => {
     const url = `${apiUrl}/${resource}`;

@@ -3,11 +3,23 @@ import axios from "axios";
 import nookies from "nookies";
 import { IUser, ResponseLoginData } from "pages/api/login";
 import { axiosInstance } from "./rest-data-provider/utils";
+import { GetServerSidePropsContext } from "next";
 
+/**
+ * Authentication provider object that implements the AuthBindings interface.
+ * Provides methods for login, logout, checking authentication status, getting permissions, and getting user identity.
+ * @typedef {Object} AuthProvider
+ * @property {Function} login - Method for logging in a user with email and password.
+ * @property {Function} logout - Method for logging out a user.
+ * @property {Function} check - Method for checking if a user is authenticated.
+ * @property {Function} getPermissions - Method for getting the permissions of an authenticated user.
+ * @property {Function} getIdentity - Method for getting the identity of an authenticated user.
+ * @property {Function} onError - Method for handling errors that occur during authentication.
+ */
 export const authProvider: AuthBindings = {
   login: async ({ email, password }) => {
     try {
-      const response = await axios.post<ResponseLoginData>("/api/login", {
+      const response = await axiosInstance.post<ResponseLoginData>("/api/login", {
         email,
         password,
       });
@@ -65,7 +77,7 @@ export const authProvider: AuthBindings = {
       redirectTo: "/login",
     };
   },
-  check: async (ctx: any) => {
+  check: async (ctx: GetServerSidePropsContext) => {
     const cookies = nookies.get(ctx);
     if (cookies.auth) {
       return {

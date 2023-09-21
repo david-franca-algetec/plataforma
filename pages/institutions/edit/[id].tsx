@@ -19,7 +19,7 @@ const InstitutionEdit: React.FC<IResourceComponentsProps> = () => {
 
   return (
     <Edit isLoading={formLoading} saveButtonProps={saveButtonProps}>
-      <FormControl mb="3" isInvalid={Boolean((errors as any)?.id)}>
+      <FormControl mb="3" isInvalid={Boolean(errors?.id)}>
         <FormLabel>{translate("institutions.fields.id")}</FormLabel>
         <Input
           disabled
@@ -29,9 +29,9 @@ const InstitutionEdit: React.FC<IResourceComponentsProps> = () => {
             valueAsNumber: true,
           })}
         />
-        <FormErrorMessage>{(errors as any)?.id?.message as string}</FormErrorMessage>
+        <FormErrorMessage>{errors?.id?.message as string}</FormErrorMessage>
       </FormControl>
-      <FormControl mb="3" isInvalid={Boolean((errors as any)?.name)}>
+      <FormControl mb="3" isInvalid={Boolean(errors?.name)}>
         <FormLabel>{translate("institutions.fields.name")}</FormLabel>
         <Input
           type="text"
@@ -39,7 +39,7 @@ const InstitutionEdit: React.FC<IResourceComponentsProps> = () => {
             required: "This field is required",
           })}
         />
-        <FormErrorMessage>{(errors as any)?.name?.message as string}</FormErrorMessage>
+        <FormErrorMessage>{errors?.name?.message as string}</FormErrorMessage>
       </FormControl>
     </Edit>
   );

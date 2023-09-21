@@ -18,7 +18,7 @@ const InstitutionCreate: FC<IResourceComponentsProps> = () => {
 
   return (
     <Create isLoading={formLoading} saveButtonProps={saveButtonProps}>
-      <FormControl mb="3" isInvalid={Boolean((errors as any)?.name)}>
+      <FormControl mb="3" isInvalid={Boolean(errors?.name)}>
         <FormLabel>{translate("institutions.fields.name")}</FormLabel>
         <Input
           type="text"
@@ -26,7 +26,7 @@ const InstitutionCreate: FC<IResourceComponentsProps> = () => {
             required: "This field is required",
           })}
         />
-        <FormErrorMessage>{(errors as any)?.name?.message as string}</FormErrorMessage>
+        <FormErrorMessage>{errors?.name?.message as string}</FormErrorMessage>
       </FormControl>
     </Create>
   );

@@ -8,7 +8,7 @@ type Props<D extends object> = {
 };
 
 export const ColumnFilter = <D extends object>({ column }: Props<D>) => {
-  const [state, setState] = useState(null as null | { value: any });
+  const [state, setState] = useState(null as null | { value: string | number });
 
   if (!column.getCanFilter()) {
     return null;
@@ -19,7 +19,7 @@ export const ColumnFilter = <D extends object>({ column }: Props<D>) => {
    */
   const open = () =>
     setState({
-      value: column.getFilterValue(),
+      value: column.getFilterValue() as string | number,
     });
 
   /**

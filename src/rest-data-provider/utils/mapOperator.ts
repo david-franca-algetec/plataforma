@@ -1,5 +1,10 @@
 import { CrudOperators } from "@refinedev/core";
 
+/**
+ * Maps a CRUD operator to its corresponding string representation.
+ * @param operator The CRUD operator to map.
+ * @returns The string representation of the CRUD operator.
+ */
 export const mapOperator = (operator: CrudOperators): string => {
   switch (operator) {
     case "ne":
@@ -13,3 +18,4 @@ export const mapOperator = (operator: CrudOperators): string => {
       return "";
   }
 };
+

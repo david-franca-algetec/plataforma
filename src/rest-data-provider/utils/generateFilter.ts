@@ -1,6 +1,12 @@
 import { CrudFilters } from "@refinedev/core";
 import { mapOperator } from "./mapOperator";
 
+/**
+ * Generates a filter object to be used in a REST API request.
+ * @param filters An array of filters to be applied to the request.
+ * @returns An object containing the filters to be used in the request.
+ * @throws An error if the filter operator is not supported.
+ */
 export const generateFilter = (filters?: CrudFilters) => {
   const queryFilters: { [key: string]: string } = {};
 
@@ -28,4 +34,3 @@ export const generateFilter = (filters?: CrudFilters) => {
 
   return queryFilters;
 };
-
