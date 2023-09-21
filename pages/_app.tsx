@@ -5,15 +5,13 @@ import routerProvider, { DocumentTitleHandler, UnsavedChangesNotifier } from "@r
 import type { NextPage } from "next";
 import { AppProps } from "next/app";
 
-import { ChakraProvider, useColorMode } from "@chakra-ui/react";
+import { ChakraProvider } from "@chakra-ui/react";
 import { Header } from "@components/header";
 import { dataProvider } from "../src/rest-data-provider";
 import { appWithTranslation, useTranslation } from "next-i18next";
 import { authProvider } from "src/authProvider";
 import { IconStar } from "@tabler/icons";
 import { Logo } from "@components/logo";
-
-const API_URL = "http://localhost:3000/api";
 
 export type NextPageWithLayout<P = {}, IP = P> = NextPage<P, IP> & {
   noLayout?: boolean;
@@ -24,8 +22,8 @@ type AppPropsWithLayout = AppProps & {
 };
 
 function MyApp({ Component, pageProps }: AppPropsWithLayout) {
-  const { colorMode } = useColorMode();
   const baseUrl = typeof window !== "undefined" ? window.location.origin : "";
+
   const renderComponent = () => {
     if (Component.noLayout) {
       return <Component {...pageProps} />;
@@ -52,7 +50,7 @@ function MyApp({ Component, pageProps }: AppPropsWithLayout) {
       <ChakraProvider theme={RefineThemes.Blue}>
         <Refine
           routerProvider={routerProvider}
-          dataProvider={dataProvider(API_URL)}
+          dataProvider={dataProvider(`${baseUrl}/api`)}
           notificationProvider={notificationProvider}
           authProvider={authProvider}
           i18nProvider={i18nProvider}
