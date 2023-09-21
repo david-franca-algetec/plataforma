@@ -1,8 +1,8 @@
 import { GetServerSideProps } from "next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
-import React, { FC, useMemo, useState } from "react";
+import React, { FC, useMemo } from "react";
 
-import { Button, Checkbox, HStack } from "@chakra-ui/react";
+import { Checkbox, HStack } from "@chakra-ui/react";
 
 import { TableChakra } from "@components/table/Table";
 import {

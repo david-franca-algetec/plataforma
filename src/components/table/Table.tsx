@@ -17,12 +17,7 @@ export function TableChakra({ columns, data }: TableChakraProps) {
     getHeaderGroups,
     getRowModel,
     setOptions,
-    refineCore: {
-      setCurrent,
-      pageCount,
-      current,
-      tableQueryResult: { data: tableData },
-    },
+    refineCore: { setCurrent, pageCount, current },
   } = useTable({
     columns,
   });
