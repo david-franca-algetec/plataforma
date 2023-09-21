@@ -13,33 +13,20 @@ import {
   useColorMode,
   useColorModeValue,
 } from "@chakra-ui/react";
-import {
-  HamburgerMenu,
-  RefineThemedLayoutV2HeaderProps,
-} from "@refinedev/chakra-ui";
+import { HamburgerMenu, RefineThemedLayoutV2HeaderProps } from "@refinedev/chakra-ui";
 import { useGetIdentity, useGetLocale } from "@refinedev/core";
 import { IconLanguage, IconMoon, IconSun } from "@tabler/icons";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import React from "react";
+import { IUser } from "../../../pages/api/login";
 
-type IUser = {
-  id: number;
-  name: string;
-  avatar: string;
-};
-
-export const Header: React.FC<RefineThemedLayoutV2HeaderProps> = ({
-  sticky,
-}) => {
+export const Header: React.FC<RefineThemedLayoutV2HeaderProps> = ({ sticky }) => {
   const { data: user } = useGetIdentity<IUser>();
 
   const { colorMode, toggleColorMode } = useColorMode();
 
-  const bgColor = useColorModeValue(
-    "refine.header.bg.light",
-    "refine.header.bg.dark"
-  );
+  const bgColor = useColorModeValue("refine.header.bg.light", "refine.header.bg.dark");
 
   const locale = useGetLocale();
   const currentLocale = locale();
@@ -53,6 +40,17 @@ export const Header: React.FC<RefineThemedLayoutV2HeaderProps> = ({
       zIndex: 1,
     };
   }
+
+  const getInitials = (name: string) => {
+    const initials = name.toUpperCase().split(" ");
+    if (initials.length === 1) {
+      return initials[0][0];
+    }
+    if (initials.length > 1) {
+      return `${initials[0].charAt(0)}${initials.pop()?.charAt(0)}`;
+    }
+    return name.toUpperCase().charAt(0);
+  };
 
   return (
     <Box
@@ -73,12 +71,7 @@ export const Header: React.FC<RefineThemedLayoutV2HeaderProps> = ({
 
       <HStack>
         <Menu>
-          <MenuButton
-            as={IconButton}
-            aria-label="Options"
-            icon={<IconLanguage />}
-            variant="ghost"
-          />
+          <MenuButton as={IconButton} aria-label="Options" icon={<IconLanguage />} variant="ghost" />
           <MenuList>
             {[...(locales ?? [])].sort().map((lang: string) => (
               <MenuItem
@@ -87,39 +80,30 @@ export const Header: React.FC<RefineThemedLayoutV2HeaderProps> = ({
                 href="/"
                 locale={lang}
                 color={lang === currentLocale ? "green" : undefined}
-                icon={
-                  <Avatar src={`/images/flags/${lang}.svg`} h={18} w={18} />
-                }
+                icon={<Avatar src={`/images/flags/${lang}.svg`} h={18} w={18} />}
               >
-                {lang === "en" ? "English" : "German"}
+                {lang === "en" ? "English" : "Português"}
               </MenuItem>
             ))}
           </MenuList>
         </Menu>
 
-        <IconButton
-          variant="ghost"
-          aria-label="Toggle theme"
-          onClick={toggleColorMode}
-        >
-          <Icon
-            as={colorMode === "light" ? IconMoon : IconSun}
-            w="24px"
-            h="24px"
-          />
+        <IconButton variant="ghost" aria-label="Toggle theme" onClick={toggleColorMode}>
+          <Icon as={colorMode === "light" ? IconMoon : IconSun} w="24px" h="24px" />
         </IconButton>
 
-        {(user?.avatar || user?.name) && (
+        {user?.name && (
           <HStack>
             {user?.name && (
               <Text size="sm" fontWeight="bold">
                 {user.name}
               </Text>
             )}
-            <Avatar size="sm" name={user?.name} src={user?.avatar} />
+            <Avatar size="sm" name={user?.name} src={getInitials(user?.name)} />
           </HStack>
         )}
       </HStack>
     </Box>
   );
 };
+

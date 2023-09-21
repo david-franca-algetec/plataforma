@@ -10,30 +10,41 @@
     "refine": "refine"
   },
   "dependencies": {
+    "@chakra-ui/icons": "^2.1.1",
+    "@chakra-ui/react": "^2.5.1",
+    "@refinedev/chakra-ui": "^2.26.8",
     "@refinedev/cli": "^2.7.4",
     "@refinedev/core": "^4.28.2",
-    "@refinedev/nextjs-router": "^5.3.2",
-    "@refinedev/inferencer": "^4.3.2",
+    "@refinedev/inferencer": "^4.5.10",
     "@refinedev/kbar": "^1.1.2",
+    "@refinedev/nextjs-router": "^5.3.2",
+    "@refinedev/react-hook-form": "^4.8.8",
+    "@refinedev/react-table": "^5.1.4",
+    "@refinedev/simple-rest": "^4.0.0",
+    "@tabler/icons": "^1.119.0",
+    "axios": "^0.26.1",
+    "chakra-dayzed-datepicker": "^0.2.10",
+    "date-fns": "^2.30.0",
+    "dayzed": "^3.2.3",
+    "lodash": "^4.17.21",
     "next": "^13.0.6",
+    "next-i18next": "^8.9.0",
+    "next-swagger-doc": "^0.4.0",
     "nookies": "^2.5.2",
+    "query-string": "^7.1.1",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
-    "@refinedev/simple-rest": "^4.0.0",
-    "@refinedev/chakra-ui": "^2.5.4",
-    "@refinedev/react-hook-form": "^4.1.2",
-    "@refinedev/react-table": "^5.1.4",
-    "@tabler/icons": "^1.1.0",
-    "@chakra-ui/react": "^2.5.1",
-    "next-i18next": "^8.9.0"
+    "swagger-ui-react": "^5.7.2"
   },
   "devDependencies": {
+    "@types/lodash": "^4.14.198",
+    "@types/node": "^12.20.11",
     "@types/react": "^18.0.0",
     "@types/react-dom": "^18.0.0",
-    "@types/node": "^12.20.11",
+    "@types/swagger-ui-react": "^4.18.0",
     "@typescript-eslint/parser": "5.48.0",
-    "typescript": "^4.7.4",
-    "cross-env": "^7.0.3"
+    "cross-env": "^7.0.3",
+    "typescript": "^4.7.4"
   },
   "refine": {
     "projectId": "ihU966-bmRkNQ-p3i3Hr"

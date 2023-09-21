@@ -1,24 +1,19 @@
-import {
-  RefineThemes,
-  ThemedLayoutV2,
-  notificationProvider,
-} from "@refinedev/chakra-ui";
-import { GitHubBanner, Refine } from "@refinedev/core";
+import { notificationProvider, RefineThemes, ThemedLayoutV2 } from "@refinedev/chakra-ui";
+import { Refine } from "@refinedev/core";
 import { RefineKbar, RefineKbarProvider } from "@refinedev/kbar";
-import routerProvider, {
-  DocumentTitleHandler,
-  UnsavedChangesNotifier,
-} from "@refinedev/nextjs-router";
+import routerProvider, { DocumentTitleHandler, UnsavedChangesNotifier } from "@refinedev/nextjs-router";
 import type { NextPage } from "next";
 import { AppProps } from "next/app";
 
-import { ChakraProvider } from "@chakra-ui/react";
+import { ChakraProvider, useColorMode } from "@chakra-ui/react";
 import { Header } from "@components/header";
-import dataProvider from "@refinedev/simple-rest";
+import { dataProvider } from "../src/rest-data-provider";
 import { appWithTranslation, useTranslation } from "next-i18next";
 import { authProvider } from "src/authProvider";
+import { IconStar } from "@tabler/icons";
+import { Logo } from "@components/logo";
 
-const API_URL = "https://api.fake-rest.refine.dev";
+const API_URL = "http://localhost:3000/api";
 
 export type NextPageWithLayout<P = {}, IP = P> = NextPage<P, IP> & {
   noLayout?: boolean;
@@ -28,14 +23,16 @@ type AppPropsWithLayout = AppProps & {
   Component: NextPageWithLayout;
 };
 
-function MyApp({ Component, pageProps }: AppPropsWithLayout): JSX.Element {
+function MyApp({ Component, pageProps }: AppPropsWithLayout) {
+  const { colorMode } = useColorMode();
+  const baseUrl = typeof window !== "undefined" ? window.location.origin : "";
   const renderComponent = () => {
     if (Component.noLayout) {
       return <Component {...pageProps} />;
     }
 
     return (
-      <ThemedLayoutV2 Header={() => <Header sticky />}>
+      <ThemedLayoutV2 Header={() => <Header sticky />} Title={() => <Logo />}>
         <Component {...pageProps} />
       </ThemedLayoutV2>
     );
@@ -50,53 +47,41 @@ function MyApp({ Component, pageProps }: AppPropsWithLayout): JSX.Element {
   };
 
   return (
-    <>
-      <GitHubBanner />
-      <RefineKbarProvider>
-        {/* You can change the theme colors here. example: theme={RefineThemes.Magenta} */}
-        <ChakraProvider theme={RefineThemes.Blue}>
-          <Refine
-            routerProvider={routerProvider}
-            dataProvider={dataProvider(API_URL)}
-            notificationProvider={notificationProvider}
-            authProvider={authProvider}
-            i18nProvider={i18nProvider}
-            resources={[
-              {
-                name: "blog_posts",
-                list: "/blog-posts",
-                create: "/blog-posts/create",
-                edit: "/blog-posts/edit/:id",
-                show: "/blog-posts/show/:id",
-                meta: {
-                  canDelete: true,
-                },
+    <RefineKbarProvider>
+      {/* You can change the theme colors here. example: theme={RefineThemes.Magenta} */}
+      <ChakraProvider theme={RefineThemes.Blue}>
+        <Refine
+          routerProvider={routerProvider}
+          dataProvider={dataProvider(API_URL)}
+          notificationProvider={notificationProvider}
+          authProvider={authProvider}
+          i18nProvider={i18nProvider}
+          resources={[
+            {
+              name: "institutions",
+              list: "/institutions",
+              create: "/institutions/create",
+              edit: "/institutions/edit/:id",
+              show: "/institutions/show/:id",
+              meta: {
+                canDelete: true,
+                icon: <IconStar size={16} />,
               },
-              {
-                name: "categories",
-                list: "/categories",
-                create: "/categories/create",
-                edit: "/categories/edit/:id",
-                show: "/categories/show/:id",
-                meta: {
-                  canDelete: true,
-                },
-              },
-            ]}
-            options={{
-              syncWithLocation: true,
-              warnWhenUnsavedChanges: true,
-              projectId: "ihU966-bmRkNQ-p3i3Hr",
-            }}
-          >
-            {renderComponent()}
-            <RefineKbar />
-            <UnsavedChangesNotifier />
-            <DocumentTitleHandler />
-          </Refine>
-        </ChakraProvider>
-      </RefineKbarProvider>
-    </>
+            },
+          ]}
+          options={{
+            syncWithLocation: true,
+            warnWhenUnsavedChanges: true,
+            projectId: "ihU966-bmRkNQ-p3i3Hr",
+          }}
+        >
+          {renderComponent()}
+          <RefineKbar />
+          <UnsavedChangesNotifier />
+          <DocumentTitleHandler />
+        </Refine>
+      </ChakraProvider>
+    </RefineKbarProvider>
   );
 }
 

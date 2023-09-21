@@ -86,6 +86,7 @@
     "undo": "Undo",
     "import": "Import",
     "clone": "Clone",
+    "export": "Export",
     "notAccessTitle": "You don't have permission to access"
   },
   "warnWhenUnsavedChanges": "Are you sure you want to leave? You have unsaved changes.",
@@ -125,39 +126,42 @@
       "show": "Show Blog Post"
     }
   },
-  "categories": {
-    "categories": "Categories",
+  "institutions": {
+    "institutions": "Institutions",
     "fields": {
       "id": "Id",
-      "title": "Title",
-      "createdAt": "Created At"
+      "name": "Name",
+      "created_at": "Created At",
+      "updated_at": "Updated At",
+      "actions": "Actions"
     },
     "titles": {
-      "create": "Create Category",
-      "edit": "Edit Category",
-      "list": "Categories",
-      "show": "Show Category"
+      "create": "Create Institution",
+      "edit": "Edit Institution",
+      "list": "Institutions",
+      "show": "Show Institution"
     }
   },
   "documentTitle": {
-    "default": "refine",
-    "suffix": " | refine",
+    "default": "Algetec",
+    "suffix": " | plataforma",
     "blog_posts": {
-      "list": "Blog Posts | refine",
-      "show": "#{{id}} Show Blog Post | refine",
-      "edit": "#{{id}} Edit Blog Post | refine",
-      "create": "Create new Blog Post | refine",
-      "clone": "#{{id}} Clone Blog Post | refine"
+      "list": "Blog Posts | Algetec",
+      "show": "#{{id}} Show Blog Post | Algetec",
+      "edit": "#{{id}} Edit Blog Post | Algetec",
+      "create": "Create new Blog Post | Algetec",
+      "clone": "#{{id}} Clone Blog Post | Algetec"
     },
     "categories": {
-      "list": "Categories | refine",
-      "show": "#{{id}} Show Category | refine",
-      "edit": "#{{id}} Edit Category | refine",
-      "create": "Create new Category | refine",
-      "clone": "#{{id}} Clone Category | refine"
+      "list": "Institutions | Algetec",
+      "show": "#{{id}} Show Institution | Algetec",
+      "edit": "#{{id}} Edit Institution | Algetec",
+      "create": "Create new Institution | Algetec",
+      "clone": "#{{id}} Clone Institution | Algetec"
     }
   },
   "table": {
     "actions": "Actions"
   }
 }
+

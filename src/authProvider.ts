@@ -1,47 +1,65 @@
 import { AuthBindings } from "@refinedev/core";
+import axios from "axios";
 import nookies from "nookies";
-
-const mockUsers = [
-  {
-    name: "John Doe",
-    email: "johndoe@mail.com",
-    roles: ["admin"],
-    avatar: "https://i.pravatar.cc/150?img=1",
-  },
-  {
-    name: "Jane Doe",
-    email: "janedoe@mail.com",
-    roles: ["editor"],
-    avatar: "https://i.pravatar.cc/150?img=1",
-  },
-];
+import {IUser, ResponseLoginData} from "pages/api/login";
+import {axiosInstance} from "./rest-data-provider/utils";
 
 export const authProvider: AuthBindings = {
-  login: async ({ email, username, password, remember }) => {
-    // Suppose we actually send a request to the back end here.
-    const user = mockUsers[0];
-
-    if (user) {
-      nookies.set(null, "auth", JSON.stringify(user), {
-        maxAge: 30 * 24 * 60 * 60,
-        path: "/",
+  login: async ({ email, password }) => {
+    try {
+      const response = await axios.post<ResponseLoginData>("/api/login", {
+        email,
+        password,
       });
+      const token = response.data.token.token;
+      const user = response.data.user[0];
+
+      if (user && token) {
+        nookies.set(null, "auth", JSON.stringify(user), {
+          maxAge: 30 * 24 * 60 * 60,
+          path: "/",
+        });
+        nookies.set(null, "token", token, {
+          maxAge: 30 * 24 * 60 * 60,
+          path: "/",
+        });
+        axiosInstance.defaults.headers.common = {
+          Authorization: `Bearer ${token}`,
+        };
+
+        return {
+          success: true,
+          redirectTo: "/",
+        };
+      }
       return {
-        success: true,
-        redirectTo: "/",
+        success: false,
+        error: {
+          name: "Login Error",
+          message: "Invalid credentials",
+        },
+      };
+    } catch (error) {
+      let message = "Something went wrong";
+      if (axios.isAxiosError(error)) {
+        message = error.response?.data?.message || message;
+      } else {
+        const err = error as Error;
+        message = err.message || message;
+      }
+
+      return {
+        success: false,
+        error: {
+          name: "Login Error",
+          message: message,
+        },
       };
     }
-
-    return {
-      success: false,
-      error: {
-        name: "LoginError",
-        message: "Invalid username or password",
-      },
-    };
   },
   logout: async () => {
     nookies.destroy(null, "auth");
+    nookies.destroy(null, "token");
     return {
       success: true,
       redirectTo: "/login",
@@ -64,15 +82,15 @@ export const authProvider: AuthBindings = {
   getPermissions: async () => {
     const auth = nookies.get()["auth"];
     if (auth) {
-      const parsedUser = JSON.parse(auth);
-      return parsedUser.roles;
+      const parsedUser: IUser = JSON.parse(auth);
+      return parsedUser.role_id;
     }
     return null;
   },
   getIdentity: async () => {
     const auth = nookies.get()["auth"];
     if (auth) {
-      const parsedUser = JSON.parse(auth);
+      const parsedUser: IUser = JSON.parse(auth);
       return parsedUser;
     }
     return null;
