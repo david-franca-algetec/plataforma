@@ -55,7 +55,7 @@ export const ColumnFilter: FC<{ column: Column<any, any> }> = ({ column }) => {
   const renderFilterElement = () => {
     const FilterComponent = (column.columnDef?.meta as any)?.filterElement;
 
-    if (!FilterComponent && Boolean(state)) {
+    if (!FilterComponent && state) {
       return <Input borderRadius="md" size="sm" autoComplete="off" value={state.value} onChange={change} />;
     }
 
