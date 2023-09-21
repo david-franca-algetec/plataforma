@@ -5,7 +5,7 @@ export const generateSort = (sorters?: CrudSorting) => {
     const _sort: string[] = [];
     const _order: string[] = [];
 
-    sorters.map((item) => {
+    sorters.forEach((item) => {
       _sort.push(item.field);
       _order.push(item.order);
     });
@@ -18,3 +18,4 @@ export const generateSort = (sorters?: CrudSorting) => {
 
   return;
 };
+
