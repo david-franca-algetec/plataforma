@@ -74,7 +74,7 @@ const BlogPostList: FC<IResourceComponentsProps> = () => {
         },
       },
     ],
-    [translate]
+    [translate],
   );
 
   const {
@@ -163,4 +163,3 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     },
   };
 };
-
