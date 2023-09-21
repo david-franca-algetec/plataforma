@@ -73,18 +73,20 @@ export const Header: React.FC<RefineThemedLayoutV2HeaderProps> = ({ sticky }) =>
         <Menu>
           <MenuButton as={IconButton} aria-label="Options" icon={<IconLanguage />} variant="ghost" />
           <MenuList>
-            {[...(locales ?? [])].sort().map((lang: string) => (
-              <MenuItem
-                key={lang}
-                as={Link}
-                href="/"
-                locale={lang}
-                color={lang === currentLocale ? "green" : undefined}
-                icon={<Avatar src={`/images/flags/${lang}.svg`} h={18} w={18} />}
-              >
-                {lang === "en" ? "English" : "Português"}
-              </MenuItem>
-            ))}
+            {[...(locales ?? [])]
+              .sort((a, b) => a.localeCompare(b))
+              .map((lang: string) => (
+                <MenuItem
+                  key={lang}
+                  as={Link}
+                  href="/"
+                  locale={lang}
+                  color={lang === currentLocale ? "green" : undefined}
+                  icon={<Avatar src={`/images/flags/${lang}.svg`} h={18} w={18} />}
+                >
+                  {lang === "en" ? "English" : "Português"}
+                </MenuItem>
+              ))}
           </MenuList>
         </Menu>
 
@@ -106,4 +108,3 @@ export const Header: React.FC<RefineThemedLayoutV2HeaderProps> = ({ sticky }) =>
     </Box>
   );
 };
-

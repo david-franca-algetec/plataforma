@@ -46,7 +46,7 @@ export const getInstitutions = (req: NextApiRequest, res: NextApiResponse, token
     method: "GET",
     headers: {
       "Content-Type": "application/json",
-      Authorization: "Bearer " + token,
+      Authorization: `Bearer ${token}`,
     },
   })
     .then(async (response) => {
@@ -118,7 +118,7 @@ export const createInstitution = (req: NextApiRequest, res: NextApiResponse, tok
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      Authorization: "Bearer " + token,
+      Authorization: `Bearer ${token}`,
     },
     body: JSON.stringify(body),
   })

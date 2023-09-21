@@ -10,7 +10,7 @@ export const getInstitution = async (req: NextApiRequest, res: NextApiResponse, 
     method: "GET",
     headers: {
       "Content-Type": "application/json",
-      Authorization: "Bearer " + token,
+      Authorization: `Bearer ${token}`,
     },
   });
   const data: Institution[] = await response.json();
@@ -39,7 +39,7 @@ export const updateInstitution = (req: NextApiRequest, res: NextApiResponse, tok
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
-      Authorization: "Bearer " + token,
+      Authorization: `Bearer ${token}`,
     },
     body: JSON.stringify(body),
   })
@@ -63,7 +63,7 @@ export const deleteInstitution = (req: NextApiRequest, res: NextApiResponse, tok
     method: "DELETE",
     headers: {
       "Content-Type": "application/json",
-      Authorization: "Bearer " + token,
+      Authorization: `Bearer ${token}`,
     },
   })
     .then(async (response) => {

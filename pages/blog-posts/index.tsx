@@ -29,7 +29,7 @@ const BlogPostList: FC<IResourceComponentsProps> = () => {
         accessorKey: "content",
         header: translate("blog_posts.fields.content"),
         cell: function render({ getValue }) {
-          return <MarkdownField value={getValue<string>()?.slice(0, 80) + "..."} />;
+          return <MarkdownField value={`${getValue<string>()?.slice(0, 80)}...`} />;
         },
       },
       {
@@ -41,7 +41,7 @@ const BlogPostList: FC<IResourceComponentsProps> = () => {
             categoryData: GetManyResponse;
           };
 
-          const category = meta.categoryData?.data?.find((item) => item.id == getValue<any>());
+          const category = meta.categoryData?.data?.find((item) => item.id === getValue<any>());
 
           return category?.title ?? "Loading...";
         },
@@ -74,7 +74,7 @@ const BlogPostList: FC<IResourceComponentsProps> = () => {
         },
       },
     ],
-    [translate],
+    [translate]
   );
 
   const {
