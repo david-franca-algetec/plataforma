@@ -14,7 +14,7 @@ type MethodTypesWithBody = "post" | "put" | "patch";
  */
 export const dataProvider = (
   apiUrl: string,
-  httpClient: AxiosInstance = axiosInstance
+  httpClient: AxiosInstance = axiosInstance,
 ): Omit<Required<DataProvider>, "createMany" | "updateMany" | "deleteMany"> => ({
   getList: async ({ resource, pagination, filters, sorters, meta }) => {
     const url = `${apiUrl}/${resource}`;
