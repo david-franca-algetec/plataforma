@@ -81,7 +81,7 @@ export const deleteInstitution = (req: NextApiRequest, res: NextApiResponse, tok
 };
 
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
-  const token = nookies.get({ req: req }).token;
+  const token = nookies.get({ req }).token;
   if (req.method === "GET") {
     return getInstitution(req, res, token);
   }
