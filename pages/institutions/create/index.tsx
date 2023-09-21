@@ -18,7 +18,7 @@ const InstitutionCreate: FC<IResourceComponentsProps> = () => {
 
   return (
     <Create isLoading={formLoading} saveButtonProps={saveButtonProps}>
-      <FormControl mb="3" isInvalid={!!(errors as any)?.name}>
+      <FormControl mb="3" isInvalid={Boolean((errors as any)?.name)}>
         <FormLabel>{translate("institutions.fields.name")}</FormLabel>
         <Input
           type="text"

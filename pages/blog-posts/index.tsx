@@ -74,7 +74,7 @@ const BlogPostList: FC<IResourceComponentsProps> = () => {
         },
       },
     ],
-    [translate]
+    [translate],
   );
 
   const {
@@ -95,7 +95,7 @@ const BlogPostList: FC<IResourceComponentsProps> = () => {
     resource: "categories",
     ids: tableData?.data?.map((item) => item?.category?.id) ?? [],
     queryOptions: {
-      enabled: !!tableData?.data,
+      enabled: Boolean(tableData?.data),
     },
   });
 
@@ -163,4 +163,3 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     },
   };
 };
-
