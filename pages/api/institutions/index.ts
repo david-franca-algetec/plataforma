@@ -97,7 +97,7 @@ export const getInstitutions = (req: NextApiRequest, res: NextApiResponse, token
                 return institution.name.toLowerCase().includes(name_like.toString().toLowerCase());
               }
               return true;
-            })
+            }),
         );
       } else {
         // Handle error
