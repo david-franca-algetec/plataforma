@@ -69,7 +69,7 @@ const UserCreate: React.FC<IResourceComponentsProps> = () => {
           {...register("confirmPassword", {
             required: true,
             validate: (val: any) => {
-              if (watch("password") != val) {
+              if (watch("password") !== val) {
                 return translate("users.errors.passwordsNotMatch", "Passwords do not match");
               }
               return;

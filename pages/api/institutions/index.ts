@@ -137,7 +137,7 @@ export const createInstitution = async (req: NextApiRequest, res: NextApiRespons
   }
 };
 
-export default async function handler(req: NextApiRequest, res: NextApiResponse<ResponseData>) {
+export default function handler(req: NextApiRequest, res: NextApiResponse<ResponseData>) {
   const token = nookies.get({ req }).token;
 
   if (req.method === "GET") {

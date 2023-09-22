@@ -33,7 +33,7 @@ export const getDepartments = async (_req: NextApiRequest, res: NextApiResponse,
   }
 };
 
-export default async function handler(req: NextApiRequest, res: NextApiResponse) {
+export default function handler(req: NextApiRequest, res: NextApiResponse) {
   const token = nookies.get({ req }).token;
 
   if (req.method === "GET") {
