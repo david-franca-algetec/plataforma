@@ -128,7 +128,7 @@ export const getUsers = async (req: NextApiRequest, res: NextApiResponse, token:
             }
 
             return 0;
-          })
+          }),
       );
     } else {
       return res.status(500).json({ message: "Invalid credentials!" });

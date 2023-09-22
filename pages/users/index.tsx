@@ -113,7 +113,7 @@ export default function UsersList() {
         },
       },
     ],
-    [translate]
+    [translate],
   );
 
   const { data: usersData } = useList<IUser[], HttpError>({
