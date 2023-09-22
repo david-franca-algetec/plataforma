@@ -10,7 +10,7 @@ import { Header } from "@components/header";
 import { dataProvider } from "../src/rest-data-provider";
 import { appWithTranslation, useTranslation } from "next-i18next";
 import { authProvider } from "src/authProvider";
-import { IconStar } from "@tabler/icons";
+import { IconStar, IconUsers } from "@tabler/icons";
 import { Logo } from "@components/logo";
 
 export type NextPageWithLayout<P = {}, IP = P> = NextPage<P, IP> & {
@@ -64,6 +64,17 @@ function MyApp({ Component, pageProps }: AppPropsWithLayout) {
               meta: {
                 canDelete: true,
                 icon: <IconStar size={16} />,
+              },
+            },
+            {
+              name: "users",
+              list: "/users",
+              create: "/users/create",
+              edit: "/users/edit/:id",
+              show: "/users/show/:id",
+              meta: {
+                canDelete: true,
+                icon: <IconUsers size={16} />,
               },
             },
           ]}

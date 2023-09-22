@@ -126,6 +126,34 @@
       "show": "Show Blog Post"
     }
   },
+  "users": {
+    "users": "Users",
+    "fields": {
+      "id": "Id",
+      "email": "Email",
+      "role": "Role",
+      "department": "Department",
+      "name": "Name",
+      "created_at": "Created At",
+      "updated_at": "Updated At",
+      "password": "Password",
+      "confirmPassword": "Confirm Password"
+    },
+    "errors": {
+      "validEmail": "Invalid email address",
+      "required": "Required field",
+      "passwordsNotMatch": "Passwords do not match",
+      "validRole": "Invalid role",
+      "validDepartment": "Invalid department",
+      "validName": "Name must be at least 3 characters long"
+    },
+    "titles": {
+      "create": "Create User",
+      "edit": "Edit User",
+      "list": "Users",
+      "show": "Show User"
+    }
+  },
   "institutions": {
     "institutions": "Institutions",
     "fields": {
@@ -164,4 +192,3 @@
     "actions": "Actions"
   }
 }
-

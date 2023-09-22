@@ -10,6 +10,11 @@ type Props<D extends object> = {
 export const ColumnFilter = <D extends object>({ column }: Props<D>) => {
   const [state, setState] = useState(null as null | { value: string | number });
 
+  /**
+   * If the column is not filterable, return null.
+   * This will prevent the filter button from being rendered.
+   * @returns null if the column is not filterable.
+   */
   if (!column.getCanFilter()) {
     return null;
   }

@@ -126,6 +126,34 @@
       "show": "Mostrar Blog Post"
     }
   },
+  "users": {
+    "users": "Usuários",
+    "fields": {
+      "id": "Id",
+      "email": "E-mail",
+      "role": "Acesso",
+      "department": "Equipe",
+      "name": "Nome",
+      "created_at": "Criado em",
+      "updated_at": "Atualizado em",
+      "password": "Senha",
+      "confirmPassword": "Confirmar senha"
+    },
+    "errors": {
+      "validEmail": "E-mail inválido",
+      "required": "Campo obrigatório",
+      "passwordsNotMatch": "As senhas não coincidem",
+      "validRole": "Acesso inválido",
+      "validDepartment": "Equipe inválida",
+      "validName": "Nome precisa ter pelo menos 3 caracteres"
+    },
+    "titles": {
+      "create": "Criar Usuário",
+      "edit": "Editar Usuário",
+      "list": "Usuários",
+      "show": "Mostrar Usuário"
+    }
+  },
   "institutions": {
     "institutions": "Instituições",
     "fields": {
@@ -164,4 +192,3 @@
     "actions": "Ações"
   }
 }
-

@@ -1,15 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import { API_URL } from "src/constants";
-
-export type IUser = {
-  id: number;
-  email: string;
-  role_id: number;
-  department_id: number;
-  name: string;
-  created_at: string;
-  updated_at: string;
-};
+import { IUser } from "./users";
 
 export type ResponseLoginData = {
   token: {

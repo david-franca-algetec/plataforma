@@ -17,7 +17,6 @@ export const ColumnSorter = <D extends object>({ column }: Props<D>) => {
     <IconButton
       aria-label="Sort"
       size="xs"
-      marginX={1}
       onClick={column.getToggleSortingHandler()}
       icon={
         <>
