@@ -1,9 +1,10 @@
 import { AuthBindings } from "@refinedev/core";
 import axios from "axios";
 import nookies from "nookies";
-import { IUser, ResponseLoginData } from "pages/api/login";
+import { ResponseLoginData } from "pages/api/login";
 import { axiosInstance } from "./rest-data-provider/utils";
 import { GetServerSidePropsContext } from "next";
+import { IUser } from "./interfaces/user";
 
 /**
  * Authentication provider object that implements the AuthBindings interface.
@@ -70,12 +71,42 @@ export const authProvider: AuthBindings = {
     }
   },
   logout: async () => {
-    nookies.destroy(null, "auth");
-    nookies.destroy(null, "token");
-    return {
-      success: true,
-      redirectTo: "/login",
-    };
+    try {
+      const response = await axiosInstance.delete("/api/logout");
+
+      if (response.status === 200) {
+        nookies.destroy(null, "auth");
+        nookies.destroy(null, "token");
+        return {
+          success: true,
+          redirectTo: "/login",
+        };
+      } else {
+        return {
+          success: false,
+          error: {
+            name: "Logout Error",
+            message: "Something went wrong",
+          },
+        };
+      }
+    } catch (error) {
+      let message = "Something went wrong";
+      if (axios.isAxiosError(error)) {
+        message = error.response?.data?.message || message;
+      } else {
+        const err = error as Error;
+        message = err.message || message;
+      }
+
+      return {
+        success: false,
+        error: {
+          name: "Logout Error",
+          message,
+        },
+      };
+    }
   },
   check: async (ctx: GetServerSidePropsContext) => {
     const cookies = nookies.get(ctx);

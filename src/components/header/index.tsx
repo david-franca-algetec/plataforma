@@ -19,7 +19,7 @@ import { IconLanguage, IconMoon, IconSun } from "@tabler/icons";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import React from "react";
-import { IUser } from "../../../pages/api/login";
+import { IUser } from "src/interfaces/user";
 
 export const Header: React.FC<RefineThemedLayoutV2HeaderProps> = ({ sticky }) => {
   const { data: user } = useGetIdentity<IUser>();

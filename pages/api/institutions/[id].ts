@@ -1,7 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import nookies from "nookies";
-import type { Institution } from ".";
 import { API_URL } from "src/constants";
+import { BackEndInstitution } from "src/interfaces/institutions";
 
 export const getInstitution = async (req: NextApiRequest, res: NextApiResponse, token: string) => {
   const { id } = req.query;
@@ -16,7 +16,7 @@ export const getInstitution = async (req: NextApiRequest, res: NextApiResponse, 
     });
 
     if (response.ok) {
-      const data: Institution[] = await response.json();
+      const data: BackEndInstitution[] = await response.json();
       res.status(200).json(
         data.map((institution) => ({
           id: institution.id,

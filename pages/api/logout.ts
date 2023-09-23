@@ -1,31 +1,19 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import { API_URL } from "src/constants";
-import { BackEndUser } from "src/interfaces/user";
-
-export type ResponseLoginData = {
-  token: {
-    type: string;
-    token: string;
-  };
-  user: BackEndUser[];
-};
+import nookies from "nookies";
 
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
-  // Check the email and password match
-  const { email, password } = req.body;
-  const body = {
-    email,
-    password,
-  };
-  fetch(`${API_URL}/login`, {
-    method: "POST",
+  const token = nookies.get({ req }).token;
+
+  fetch(`${API_URL}/logout`, {
+    method: "DELETE",
     headers: {
       "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
     },
-    body: JSON.stringify(body),
   })
     .then(async (response) => {
-      const data: ResponseLoginData = await response.json();
+      const data = await response.json();
       if (response.ok) {
         res.status(200).json(data);
       } else {

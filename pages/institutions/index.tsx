@@ -18,7 +18,7 @@ import { HttpError, IResourceComponentsProps, useExport, useList, useTranslate }
 import { ColumnDef } from "@tanstack/react-table";
 
 import { authProvider } from "../../src/authProvider";
-import { IInstitution } from "../api/institutions";
+import { IInstitution } from "src/interfaces/institutions";
 
 const InstitutionsList: FC<IResourceComponentsProps> = () => {
   const translate = useTranslate();

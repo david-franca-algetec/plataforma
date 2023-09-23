@@ -2,16 +2,7 @@ import { NextApiRequest, NextApiResponse } from "next";
 import nookies from "nookies";
 
 import { API_URL } from "src/constants";
-
-export type Institution = {
-  id: number;
-  name: string;
-  created_at: string;
-  updated_at: string;
-  demands: any[];
-};
-
-export type IInstitution = Omit<Institution, "demands">;
+import { BackEndInstitution, IInstitution } from "src/interfaces/institutions";
 
 interface ResponseData {
   message: string;
@@ -53,7 +44,7 @@ export const getInstitutions = async (req: NextApiRequest, res: NextApiResponse,
     });
 
     if (response.ok) {
-      const data: Institution[] = await response.json();
+      const data: BackEndInstitution[] = await response.json();
 
       res.status(200).json(
         data
@@ -127,8 +118,13 @@ export const createInstitution = async (req: NextApiRequest, res: NextApiRespons
     });
 
     if (response.ok) {
-      const data: Institution = await response.json();
-      res.status(200).json(data);
+      const data: BackEndInstitution = await response.json();
+      res.status(200).json({
+        id: data.id,
+        name: data.name,
+        created_at: data.created_at,
+        updated_at: data.updated_at,
+      });
     } else {
       res.status(500).json({ message: "Invalid credentials!" });
     }
