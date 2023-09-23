@@ -21,7 +21,7 @@ export const getDepartments = async (_req: NextApiRequest, res: NextApiResponse,
         data.map((department) => ({
           ...department,
           name: handleDepartmentName(department.name),
-        }))
+        })),
       );
     }
     return res.status(400).json({ message: "Something went wrong" });
