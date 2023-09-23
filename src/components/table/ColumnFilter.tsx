@@ -1,4 +1,4 @@
-import React, { ChangeEvent, FC, useState } from "react";
+import React, { ChangeEvent, useState } from "react";
 import { HStack, IconButton, Input, Menu, MenuButton, MenuList, VStack } from "@chakra-ui/react";
 import { IconCheck, IconFilter, IconX } from "@tabler/icons";
 import type { Column } from "@tanstack/react-table";
