@@ -129,7 +129,7 @@ export const createUser = async (req: NextApiRequest, res: NextApiResponse, toke
   }
 };
 
-export default async function handler(req: NextApiRequest, res: NextApiResponse) {
+export default function handler(req: NextApiRequest, res: NextApiResponse) {
   const token = nookies.get({ req }).token;
 
   if (req.method === "GET") {
