@@ -18,6 +18,7 @@ export const getRoles = async (_req: NextApiRequest, res: NextApiResponse, token
     if (response.ok) {
       return res.status(200).json(data);
     }
+    return res.status(400).json({ message: "Something went wrong" });
   } catch (error) {
     if (error instanceof Error) {
       return res.status(500).json({ message: error.message });

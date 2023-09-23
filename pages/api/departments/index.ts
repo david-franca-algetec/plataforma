@@ -24,6 +24,7 @@ export const getDepartments = async (_req: NextApiRequest, res: NextApiResponse,
         }))
       );
     }
+    return res.status(400).json({ message: "Something went wrong" });
   } catch (error) {
     if (error instanceof Error) {
       return res.status(500).json({ message: error.message });

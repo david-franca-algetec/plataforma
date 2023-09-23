@@ -81,6 +81,7 @@ export const ColumnFilter = <D extends object>({ column }: Props<D>) => {
     if (FilterComponent) {
       return <FilterComponent value={state?.value} onChange={change} />;
     }
+    return null;
   };
 
   return (

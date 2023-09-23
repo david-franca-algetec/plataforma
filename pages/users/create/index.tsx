@@ -72,7 +72,7 @@ const UserCreate: React.FC<IResourceComponentsProps> = () => {
               if (watch("password") !== val) {
                 return translate("users.errors.passwordsNotMatch", "Passwords do not match");
               }
-              return;
+              return undefined;
             },
           })}
         />
