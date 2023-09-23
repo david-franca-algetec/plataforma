@@ -91,7 +91,7 @@ export const getInstitutions = async (req: NextApiRequest, res: NextApiResponse,
               return institution.name.toLowerCase().includes(name_like.toString().toLowerCase());
             }
             return true;
-          })
+          }),
       );
     } else {
       res.status(500).json({ message: "Invalid credentials!" });
