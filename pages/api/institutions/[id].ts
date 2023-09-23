@@ -23,7 +23,7 @@ export const getInstitution = async (req: NextApiRequest, res: NextApiResponse, 
           name: institution.name,
           created_at: institution.created_at,
           updated_at: institution.updated_at,
-        }))[0]
+        }))[0],
       );
     } else {
       res.status(500).json({ message: "Invalid credentials!" });
