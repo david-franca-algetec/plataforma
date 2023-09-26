@@ -89,7 +89,7 @@ export const getUsers = async (req: NextApiRequest, res: NextApiResponse, token:
               return user.department === department;
             }
             return user;
-          })
+          }),
       );
     } else {
       return res.status(500).json({ message: "Invalid credentials!" });
