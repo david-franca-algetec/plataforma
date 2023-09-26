@@ -1,7 +1,15 @@
-import { notificationProvider, RefineThemes, ThemedLayoutV2 } from "@refinedev/chakra-ui";
+import { DevtoolsProvider, DevtoolsPanel } from "@refinedev/devtools";
+import {
+  notificationProvider,
+  RefineThemes,
+  ThemedLayoutV2,
+} from "@refinedev/chakra-ui";
 import { Refine } from "@refinedev/core";
 import { RefineKbar, RefineKbarProvider } from "@refinedev/kbar";
-import routerProvider, { DocumentTitleHandler, UnsavedChangesNotifier } from "@refinedev/nextjs-router";
+import routerProvider, {
+  DocumentTitleHandler,
+  UnsavedChangesNotifier,
+} from "@refinedev/nextjs-router";
 import type { NextPage } from "next";
 import { AppProps } from "next/app";
 
@@ -48,47 +56,50 @@ function MyApp({ Component, pageProps }: AppPropsWithLayout) {
     <RefineKbarProvider>
       {/* You can change the theme colors here. example: theme={RefineThemes.Magenta} */}
       <ChakraProvider theme={RefineThemes.Blue}>
-        <Refine
-          routerProvider={routerProvider}
-          dataProvider={dataProvider(`${baseUrl}/api`)}
-          notificationProvider={notificationProvider}
-          authProvider={authProvider}
-          i18nProvider={i18nProvider}
-          resources={[
-            {
-              name: "institutions",
-              list: "/institutions",
-              create: "/institutions/create",
-              edit: "/institutions/edit/:id",
-              show: "/institutions/show/:id",
-              meta: {
-                canDelete: true,
-                icon: <IconStar size={16} />,
+        <DevtoolsProvider>
+          <Refine
+            routerProvider={routerProvider}
+            dataProvider={dataProvider(`${baseUrl}/api`)}
+            notificationProvider={notificationProvider}
+            authProvider={authProvider}
+            i18nProvider={i18nProvider}
+            resources={[
+              {
+                name: "institutions",
+                list: "/institutions",
+                create: "/institutions/create",
+                edit: "/institutions/edit/:id",
+                show: "/institutions/show/:id",
+                meta: {
+                  canDelete: true,
+                  icon: <IconStar size={16} />,
+                },
               },
-            },
-            {
-              name: "users",
-              list: "/users",
-              create: "/users/create",
-              edit: "/users/edit/:id",
-              show: "/users/show/:id",
-              meta: {
-                canDelete: true,
-                icon: <IconUsers size={16} />,
+              {
+                name: "users",
+                list: "/users",
+                create: "/users/create",
+                edit: "/users/edit/:id",
+                show: "/users/show/:id",
+                meta: {
+                  canDelete: true,
+                  icon: <IconUsers size={16} />,
+                },
               },
-            },
-          ]}
-          options={{
-            syncWithLocation: true,
-            warnWhenUnsavedChanges: true,
-            projectId: "ihU966-bmRkNQ-p3i3Hr",
-          }}
-        >
-          {renderComponent()}
-          <RefineKbar />
-          <UnsavedChangesNotifier />
-          <DocumentTitleHandler />
-        </Refine>
+            ]}
+            options={{
+              syncWithLocation: true,
+              warnWhenUnsavedChanges: true,
+              projectId: "ihU966-bmRkNQ-p3i3Hr",
+            }}
+          >
+            {renderComponent()}
+            <RefineKbar />
+            <UnsavedChangesNotifier />
+            <DocumentTitleHandler />
+          </Refine>
+          <DevtoolsPanel />
+        </DevtoolsProvider>
       </ChakraProvider>
     </RefineKbarProvider>
   );
