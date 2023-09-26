@@ -1,7 +1,7 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import nookies from "nookies";
-
 import { API_URL } from "src/constants";
+import { sortByDate } from "src/helpers/sortByDate";
 import { BackEndInstitution, IInstitution } from "src/interfaces/institutions";
 
 interface ResponseData {
@@ -16,19 +16,6 @@ function isDateValid(dateStr: string | number) {
   } catch (e) {
     return false;
   }
-}
-
-function sortByDate(a: string | number, b: string | number) {
-  const dayA = new Date(a).getTime();
-  const dayB = new Date(b).getTime();
-
-  if (dayA > dayB) {
-    return 1;
-  }
-  if (dayA < dayB) {
-    return -1;
-  }
-  return 0;
 }
 
 export const getInstitutions = async (req: NextApiRequest, res: NextApiResponse, token: string) => {

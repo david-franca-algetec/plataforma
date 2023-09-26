@@ -2,6 +2,7 @@ import { NextApiRequest, NextApiResponse } from "next";
 import nookies from "nookies";
 import { API_URL } from "src/constants";
 import { handleDepartmentName } from "src/helpers/handleDepartmentName";
+import { sortByDate } from "src/helpers/sortByDate";
 import { BackEndUser, IUserCreate } from "src/interfaces/user";
 
 export type ResponseUser = Omit<
@@ -21,21 +22,9 @@ function isDateValid(dateStr: string | number) {
   }
 }
 
-function sortByDate(a: string | number, b: string | number) {
-  const dayA = new Date(a).getTime();
-  const dayB = new Date(b).getTime();
-
-  if (dayA > dayB) {
-    return 1;
-  }
-  if (dayA < dayB) {
-    return -1;
-  }
-  return 0;
-}
-
 export const getUsers = async (req: NextApiRequest, res: NextApiResponse, token: string) => {
-  const { _order, _sort } = req.query;
+  const { _order, _sort, role, department } = req.query;
+
   try {
     const response = await fetch(`${API_URL}/users`, {
       method: "GET",
@@ -88,6 +77,18 @@ export const getUsers = async (req: NextApiRequest, res: NextApiResponse, token:
             }
 
             return 0;
+          })
+          .filter((user) => {
+            if (role && department) {
+              return user.role === role && user.department === department;
+            }
+            if (role) {
+              return user.role === role;
+            }
+            if (department) {
+              return user.department === department;
+            }
+            return user;
           })
       );
     } else {

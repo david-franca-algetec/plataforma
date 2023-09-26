@@ -1,5 +1,8 @@
 {
   "name": "plataforma",
+  "refine": {
+    "projectId": "oif41g-oGzfFh-iqWuJ9"
+  },
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -46,8 +49,5 @@
     "@typescript-eslint/parser": "5.48.0",
     "cross-env": "^7.0.3",
     "typescript": "^4.7.4"
-  },
-  "refine": {
-    "projectId": "ihU966-bmRkNQ-p3i3Hr"
   }
 }

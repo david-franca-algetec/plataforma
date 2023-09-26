@@ -1,8 +1,8 @@
-import React from "react";
+import React, { useMemo } from "react";
 import { GetServerSideProps } from "next";
 import { authProvider } from "src/authProvider";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
-import { HttpError, useExport, useList, useTranslate } from "@refinedev/core";
+import { HttpError, useExport, useList, useSelect, useTranslate } from "@refinedev/core";
 import { ColumnDef } from "@tanstack/react-table";
 import {
   EditButton,
@@ -16,8 +16,9 @@ import {
   TagField,
   TextField,
 } from "@refinedev/chakra-ui";
-import { HStack } from "@chakra-ui/react";
+import { HStack, Select } from "@chakra-ui/react";
 import { TableChakra } from "@components/table/Table";
+import { FilterElementProps } from "@components/table/ColumnFilter";
 
 type IUser = {
   id: number;
@@ -31,7 +32,19 @@ type IUser = {
 
 export default function UsersList() {
   const translate = useTranslate();
-  const columns = React.useMemo<ColumnDef<IUser>[]>(
+  const { options: rolesOptions } = useSelect({
+    resource: "roles",
+    optionLabel: "name",
+    optionValue: "name",
+  });
+
+  const { options: departmentsOptions } = useSelect({
+    resource: "departments",
+    optionLabel: "name",
+    optionValue: "name",
+  });
+
+  const columns = useMemo<ColumnDef<IUser>[]>(
     () => [
       {
         id: "name",
@@ -60,7 +73,18 @@ export default function UsersList() {
         accessorKey: "role",
         header: translate("users.fields.role"),
         meta: {
-          filterOperator: "contains",
+          filterElement: function render(props: FilterElementProps) {
+            return (
+              <Select borderRadius="md" size="sm" placeholder={translate("table.filters.select")} {...props}>
+                {rolesOptions?.map((option) => (
+                  <option key={option.value} value={option.value}>
+                    {option.label}
+                  </option>
+                ))}
+              </Select>
+            );
+          },
+          filterOperator: "eq",
         },
         cell: function render({ getValue }) {
           return <TextField value={getValue<string>()} noOfLines={1} w={150} />;
@@ -71,7 +95,18 @@ export default function UsersList() {
         accessorKey: "department",
         header: translate("users.fields.department"),
         meta: {
-          filterOperator: "contains",
+          filterElement: function render(props: FilterElementProps) {
+            return (
+              <Select borderRadius="md" size="sm" placeholder={translate("table.filters.select")} {...props}>
+                {departmentsOptions?.map((option) => (
+                  <option key={option.value} value={option.value}>
+                    {option.label}
+                  </option>
+                ))}
+              </Select>
+            );
+          },
+          filterOperator: "eq",
         },
         cell: function render({ getValue }) {
           return <TagField value={getValue<string>()} />;
@@ -113,7 +148,7 @@ export default function UsersList() {
         },
       },
     ],
-    [translate]
+    [translate, rolesOptions, departmentsOptions]
   );
 
   const { data: usersData } = useList<IUser[], HttpError>({

@@ -173,22 +173,25 @@
   "documentTitle": {
     "default": "Algetec",
     "suffix": " | plataforma",
-    "blog_posts": {
-      "list": "Blog Posts | Algetec",
-      "show": "#{{id}} Mostrar Blog Post | Algetec",
-      "edit": "#{{id}} Editar Blog Post | Algetec",
-      "create": "Criar novo Blog Post | Algetec",
-      "clone": "#{{id}} Clonar Blog Post | Algetec"
-    },
     "institutions": {
       "list": "Instituições | Algetec",
       "show": "#{{id}} Mostrar Instituição | Algetec",
       "edit": "#{{id}} Editar Instituição | Algetec",
       "create": "Criar nova Instituição | Algetec",
       "clone": "#{{id}} Clonar Instituição | Algetec"
+    },
+    "users": {
+      "list": "Usuários | Algetec",
+      "show": "#{{id}} Mostrar Usuário | Algetec",
+      "edit": "#{{id}} Editar Usuário | Algetec",
+      "create": "Criar nova Usuário | Algetec",
+      "clone": "#{{id}} Clonar Usuário | Algetec"
     }
   },
   "table": {
-    "actions": "Ações"
+    "actions": "Ações",
+    "filters": {
+      "select": "Selecione uma opção"
+    }
   }
 }

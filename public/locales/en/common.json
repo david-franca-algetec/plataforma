@@ -172,23 +172,26 @@
   },
   "documentTitle": {
     "default": "Algetec",
-    "suffix": " | plataforma",
-    "blog_posts": {
-      "list": "Blog Posts | Algetec",
-      "show": "#{{id}} Show Blog Post | Algetec",
-      "edit": "#{{id}} Edit Blog Post | Algetec",
-      "create": "Create new Blog Post | Algetec",
-      "clone": "#{{id}} Clone Blog Post | Algetec"
-    },
-    "categories": {
+    "suffix": " | platform",
+    "institutions": {
       "list": "Institutions | Algetec",
-      "show": "#{{id}} Show Institution | Algetec",
-      "edit": "#{{id}} Edit Institution | Algetec",
-      "create": "Create new Institution | Algetec",
+      "show": "#{{id}} Show Instituição | Algetec",
+      "edit": "#{{id}} Edit Instituição | Algetec",
+      "create": "Create Institution | Algetec",
       "clone": "#{{id}} Clone Institution | Algetec"
+    },
+    "users": {
+      "list": "Users | Algetec",
+      "show": "#{{id}} Show User | Algetec",
+      "edit": "#{{id}} Edit User | Algetec",
+      "create": "Create User | Algetec",
+      "clone": "#{{id}} Clone User | Algetec"
     }
   },
   "table": {
-    "actions": "Actions"
+    "actions": "Actions",
+    "filters": {
+      "select": "Select an option"
+    }
   }
 }
