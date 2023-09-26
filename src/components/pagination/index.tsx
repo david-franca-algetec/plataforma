@@ -29,6 +29,17 @@ export const Pagination: FC<PaginationProps> = ({ current, pageCount, setCurrent
     setCurrent(current - 1);
   }, [current, setCurrent]);
 
+  /**
+   * Callback function that updates the current page number.
+   * @param page - The new page number to set as current.
+   */
+  const handlePageChange = useCallback(
+    (page: number) => {
+      setCurrent(page);
+    },
+    [setCurrent]
+  );
+
   return (
     <Box display="flex" justifyContent="flex-end">
       <HStack my="3" spacing="1">
@@ -42,7 +53,7 @@ export const Pagination: FC<PaginationProps> = ({ current, pageCount, setCurrent
           if (typeof page === "string") return <span key={page}>...</span>;
 
           return (
-            <Button key={page} onClick={() => setCurrent(page)} variant={page === current ? "solid" : "outline"}>
+            <Button key={page} onClick={() => handlePageChange(page)} variant={page === current ? "solid" : "outline"}>
               {page}
             </Button>
           );

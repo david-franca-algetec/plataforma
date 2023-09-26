@@ -30,8 +30,11 @@ function MyApp({ Component, pageProps }: AppPropsWithLayout) {
       return <Component {...pageProps} />;
     }
 
+    const header = () => <Header sticky />;
+    const title = () => <Logo />;
+
     return (
-      <ThemedLayoutV2 Header={() => <Header sticky />} Title={() => <Logo />}>
+      <ThemedLayoutV2 Header={header} Title={title}>
         <Component {...pageProps} />
       </ThemedLayoutV2>
     );
@@ -99,4 +102,3 @@ function MyApp({ Component, pageProps }: AppPropsWithLayout) {
 }
 
 export default appWithTranslation(MyApp);
-
