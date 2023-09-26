@@ -1,18 +1,17 @@
-import React, { ChangeEvent, ComponentType, ReactNode, useState } from "react";
+import React, { ChangeEvent, ChangeEventHandler, ComponentType, ReactNode, useState } from "react";
+
 import { HStack, IconButton, Input, Menu, MenuButton, MenuList, VStack } from "@chakra-ui/react";
 import { IconCheck, IconFilter, IconX } from "@tabler/icons";
+
 import type { Column } from "@tanstack/react-table";
 
 export interface FilterElementProps {
-  value: any;
-  onChange: (value: any) => void;
+  value?: string | number;
+  onChange: ChangeEventHandler<HTMLSelectElement | HTMLInputElement>;
 }
 
 interface ColumnDefMeta {
-  filterElement?: {
-    value: string;
-    onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
-  };
+  filterElement?: ComponentType<FilterElementProps>;
 }
 
 interface ColumnDef {
@@ -78,7 +77,7 @@ export const ColumnFilter = <D extends object>({ column }: Props<D>) => {
    * @returns The filter element to be rendered.
    */
   const renderFilterElement = () => {
-    const FilterComponent = (column.columnDef?.meta as any)?.filterElement;
+    const FilterComponent = (column.columnDef?.meta as ColumnDef["meta"])?.filterElement;
 
     if (!FilterComponent && state) {
       return <Input borderRadius="md" size="sm" autoComplete="off" value={state.value} onChange={change} />;
