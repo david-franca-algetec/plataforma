@@ -1,15 +1,8 @@
 import { DevtoolsProvider, DevtoolsPanel } from "@refinedev/devtools";
-import {
-  notificationProvider,
-  RefineThemes,
-  ThemedLayoutV2,
-} from "@refinedev/chakra-ui";
+import { notificationProvider, RefineThemes, ThemedLayoutV2 } from "@refinedev/chakra-ui";
 import { Refine } from "@refinedev/core";
 import { RefineKbar, RefineKbarProvider } from "@refinedev/kbar";
-import routerProvider, {
-  DocumentTitleHandler,
-  UnsavedChangesNotifier,
-} from "@refinedev/nextjs-router";
+import routerProvider, { DocumentTitleHandler, UnsavedChangesNotifier } from "@refinedev/nextjs-router";
 import type { NextPage } from "next";
 import { AppProps } from "next/app";
 
