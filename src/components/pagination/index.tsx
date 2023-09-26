@@ -37,7 +37,7 @@ export const Pagination: FC<PaginationProps> = ({ current, pageCount, setCurrent
     (page: number) => {
       setCurrent(page);
     },
-    [setCurrent]
+    [setCurrent],
   );
 
   return (
