@@ -51,13 +51,7 @@ export default function index() {
         accessorKey: "tags",
         header: translate("demands.fields.tags"),
         cell: function render({ getValue }) {
-          return (
-            <HStack>
-              {getValue<string[]>()?.map((item, index) => (
-                <TagField value={item} key={index} />
-              ))}
-            </HStack>
-          );
+          return <HStack>{getValue<string[]>()?.map((item, index) => <TagField value={item} key={index} />)}</HStack>;
         },
       },
       {
@@ -123,7 +117,7 @@ export default function index() {
         },
       },
     ],
-    [translate]
+    [translate],
   );
 
   const { triggerExport, isLoading: exportLoading } = useExport({

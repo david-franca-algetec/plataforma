@@ -36,7 +36,7 @@ export const getDemands = async (req: NextApiRequest, res: NextApiResponse, toke
             ualab: demand.latest_ualab_log?.demandLog_developers.map((el) => el.name).join(", ") || "",
             designing: demand.latest_designing_log?.demandLog_developers.map((el) => el.name).join(", ") || "",
           }))
-          .sort((a, b) => sortArray(a, b, _sort as string, _order as string))
+          .sort((a, b) => sortArray(a, b, _sort as string, _order as string)),
       );
     }
     return res.status(400).json({ message: "Something went wrong" });

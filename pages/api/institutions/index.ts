@@ -37,8 +37,8 @@ export const getInstitutions = async (req: NextApiRequest, res: NextApiResponse,
               updated_at: institution.updated_at,
             }))
             .sort((a, b) => sortArray(a, b, _sort as string, _order as string)),
-          filters
-        )
+          filters,
+        ),
       );
     } else {
       res.status(500).json({ message: "Invalid credentials!" });

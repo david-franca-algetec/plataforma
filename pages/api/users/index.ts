@@ -47,8 +47,8 @@ export const getUsers = async (req: NextApiRequest, res: NextApiResponse, token:
               updated_at: user.updated_at,
             }))
             .sort((a, b) => sortArray(a, b, _sort as string, _order as string)),
-          filters
-        )
+          filters,
+        ),
       );
     } else {
       return res.status(500).json({ message: "Invalid credentials!" });
