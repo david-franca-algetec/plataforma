@@ -39,7 +39,7 @@ function MyApp({ Component, pageProps }: AppPropsWithLayout) {
             cacheTime: 1000 * 60 * 60 * 24, // 24 hours
           },
         },
-      })
+      }),
   );
 
   const sessionStoragePersister = createSyncStoragePersister({

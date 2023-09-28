@@ -42,7 +42,7 @@ export const ColumnFilter = <D extends object>({ column }: Props<D>) => {
       setState({
         value: column.getFilterValue() as string | number,
       }),
-    [column]
+    [column],
   );
 
   /**

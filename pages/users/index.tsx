@@ -150,7 +150,7 @@ export default function UsersList() {
         },
       },
     ],
-    [translate, rolesOptions, departmentsOptions]
+    [translate, rolesOptions, departmentsOptions],
   );
 
   const { data: usersData } = useList<IUser[], HttpError>({
