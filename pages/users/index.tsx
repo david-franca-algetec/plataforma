@@ -1,8 +1,8 @@
-import React, { useMemo } from "react";
+import React, { useMemo, useState } from "react";
 import { GetServerSideProps } from "next";
 import { authProvider } from "src/authProvider";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
-import { HttpError, useExport, useList, useSelect, useTranslate } from "@refinedev/core";
+import { HttpError, useExport, useList, useModal, useSelect, useTranslate } from "@refinedev/core";
 import { ColumnDef } from "@tanstack/react-table";
 import {
   EditButton,
@@ -19,6 +19,8 @@ import {
 import { HStack, Select } from "@chakra-ui/react";
 import { TableChakra } from "@components/table/Table";
 import { FilterElementProps } from "@components/table/ColumnFilter";
+import { Modal } from "@components/modal";
+import { History } from "@components/history";
 
 type IUser = {
   id: number;
@@ -32,6 +34,7 @@ type IUser = {
 
 export default function UsersList() {
   const translate = useTranslate();
+
   const { options: rolesOptions } = useSelect({
     resource: "roles",
     optionLabel: "name",
@@ -112,7 +115,6 @@ export default function UsersList() {
           return <TagField value={getValue<string>()} />;
         },
       },
-
       {
         id: "created_at",
         accessorKey: "created_at",
@@ -180,7 +182,7 @@ export default function UsersList() {
         </>
       }
     >
-      <TableChakra columns={columns} data={usersData} />
+      <TableChakra columns={columns} />
     </List>
   );
 }

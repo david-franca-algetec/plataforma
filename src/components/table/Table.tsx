@@ -5,21 +5,25 @@ import { ColumnFilter } from "./ColumnFilter";
 import { useTable } from "@refinedev/react-table";
 import { ColumnDef, flexRender } from "@tanstack/react-table";
 import { Pagination } from "@components/pagination";
-import type { GetListResponse } from "@refinedev/core";
 import { TextField } from "@refinedev/chakra-ui";
+import { HttpError } from "@refinedev/core";
 
 type TableChakraProps<D extends object> = {
-  data?: GetListResponse<D[]>;
   columns: ColumnDef<D>[];
 };
 
-export function TableChakra<D extends object>({ columns, data }: TableChakraProps<D>) {
+export function TableChakra<D extends object>({ columns }: TableChakraProps<D>) {
   const {
     getHeaderGroups,
     getRowModel,
     setOptions,
-    refineCore: { setCurrent, pageCount, current },
-  } = useTable({
+    refineCore: {
+      setCurrent,
+      pageCount,
+      current,
+      tableQueryResult: { data: tableData },
+    },
+  } = useTable<D, HttpError>({
     columns,
   });
 
@@ -27,7 +31,7 @@ export function TableChakra<D extends object>({ columns, data }: TableChakraProp
     ...prev,
     meta: {
       ...prev.meta,
-      data,
+      tableData,
     },
   }));
 

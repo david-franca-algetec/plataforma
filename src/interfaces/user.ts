@@ -14,17 +14,9 @@ export type BackEndUser = {
   department: IDepartment;
 };
 
-export type IUser = {
-  id: number;
-  email: string;
-  role_id: number;
-  department_id: number;
-  name: string;
-  created_at: string;
-  updated_at: string;
-};
+export type FrontEndUser = Omit<BackEndUser, "role" | "department" | "remember_me_token">;
 
-export type IUserCreate = {
+export type FrontEndUserCreate = {
   name: string;
   email: string;
   password: string;

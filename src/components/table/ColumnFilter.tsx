@@ -1,4 +1,4 @@
-import React, { ChangeEvent, ChangeEventHandler, ComponentType, useState } from "react";
+import React, { ChangeEvent, ChangeEventHandler, ComponentType, useCallback, useState } from "react";
 
 import { HStack, IconButton, Input, Menu, MenuButton, MenuList, VStack } from "@chakra-ui/react";
 import { IconCheck, IconFilter, IconX } from "@tabler/icons";
@@ -37,38 +37,41 @@ export const ColumnFilter = <D extends object>({ column }: Props<D>) => {
   /**
    * Opens the column filter and sets the initial value to the current filter value.
    */
-  const open = () =>
-    setState({
-      value: column.getFilterValue() as string | number,
-    });
+  const open = useCallback(
+    () =>
+      setState({
+        value: column.getFilterValue() as string | number,
+      }),
+    [column]
+  );
 
   /**
    * Closes the column filter.
    */
-  const close = () => setState(null);
+  const close = useCallback(() => setState(null), []);
 
   /**
    * Updates the state with the new value from the input element.
    * @param e - The change event from the input element.
    */
-  const change = (e: ChangeEvent<HTMLInputElement>) => setState({ value: e.target.value });
+  const change = useCallback((e: ChangeEvent<HTMLInputElement>) => setState({ value: e.target.value }), []);
 
   /**
    * Clears the filter value of the column and closes the filter dropdown.
    */
-  const clear = () => {
+  const clear = useCallback(() => {
     column.setFilterValue(undefined);
     close();
-  };
+  }, [column, close]);
 
   /**
    * Saves the current filter value to the column and closes the filter modal.
    */
-  const save = () => {
+  const save = useCallback(() => {
     if (!state) return;
     column.setFilterValue(state.value);
     close();
-  };
+  }, [column, close, state]);
 
   /**
    * Renders the filter element for the column.
@@ -76,7 +79,7 @@ export const ColumnFilter = <D extends object>({ column }: Props<D>) => {
    * Otherwise, it will render a default input element.
    * @returns The filter element to be rendered.
    */
-  const renderFilterElement = () => {
+  const renderFilterElement = useCallback(() => {
     const FilterComponent = (column.columnDef?.meta as ColumnDef["meta"])?.filterElement;
 
     if (!FilterComponent && state) {
@@ -86,7 +89,7 @@ export const ColumnFilter = <D extends object>({ column }: Props<D>) => {
       return <FilterComponent value={state?.value} onChange={change} />;
     }
     return null;
-  };
+  }, [change, column, state]);
 
   return (
     <Menu isOpen={Boolean(state)} onClose={close}>

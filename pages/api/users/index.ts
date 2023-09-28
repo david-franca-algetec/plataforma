@@ -1,9 +1,10 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import nookies from "nookies";
 import { API_URL } from "src/constants";
+import { Filter, filterArray } from "src/helpers/filterArray";
 import { handleDepartmentName } from "src/helpers/handleDepartmentName";
-import { sortByDate } from "src/helpers/sortByDate";
-import { BackEndUser, IUserCreate } from "src/interfaces/user";
+import { sortArray } from "src/helpers/sortArray";
+import { BackEndUser, FrontEndUserCreate } from "src/interfaces/user";
 
 export type ResponseUser = Omit<
   BackEndUser,
@@ -13,17 +14,15 @@ export type ResponseUser = Omit<
   department: string;
 };
 
-function isDateValid(dateStr: string | number) {
-  try {
-    const date = new Date(dateStr);
-    return !isNaN(date.getTime());
-  } catch (e) {
-    return false;
-  }
-}
-
 export const getUsers = async (req: NextApiRequest, res: NextApiResponse, token: string) => {
-  const { _order, _sort, role, department } = req.query;
+  const { _order, _sort, role, department, email_like, name_like } = req.query;
+
+  const filters: Filter[] = [
+    { key: "role", value: role },
+    { key: "department", value: department },
+    { key: "email", value: email_like },
+    { key: "name", value: name_like },
+  ];
 
   try {
     const response = await fetch(`${API_URL}/users`, {
@@ -36,60 +35,20 @@ export const getUsers = async (req: NextApiRequest, res: NextApiResponse, token:
 
     if (response.ok) {
       return res.status(200).json(
-        data
-          .map((user) => ({
-            id: user.id,
-            email: user.email,
-            role: user.role.name,
-            department: handleDepartmentName(user.department.name),
-            name: user.name,
-            created_at: user.created_at,
-            updated_at: user.updated_at,
-          }))
-          .sort((a, b) => {
-            const sort = _sort as keyof ResponseUser;
-            const aField = a[sort];
-            const bField = b[sort];
-
-            if (isDateValid(aField) && isDateValid(bField)) {
-              if (_order === "asc") {
-                return sortByDate(aField, bField);
-              }
-              if (_order === "desc") {
-                return sortByDate(bField, aField);
-              }
-            }
-            if (typeof aField === "number" && typeof bField === "number") {
-              if (_order === "asc") {
-                return aField > bField ? 1 : -1;
-              }
-              if (_order === "desc") {
-                return bField > aField ? 1 : -1;
-              }
-            }
-            if (typeof aField === "string" && typeof bField === "string") {
-              if (_order === "asc") {
-                return aField.localeCompare(bField);
-              }
-              if (_order === "desc") {
-                return bField.localeCompare(aField);
-              }
-            }
-
-            return 0;
-          })
-          .filter((user) => {
-            if (role && department) {
-              return user.role === role && user.department === department;
-            }
-            if (role) {
-              return user.role === role;
-            }
-            if (department) {
-              return user.department === department;
-            }
-            return user;
-          })
+        filterArray(
+          data
+            .map((user) => ({
+              id: user.id,
+              email: user.email,
+              role: user.role.name,
+              department: handleDepartmentName(user.department.name),
+              name: user.name,
+              created_at: user.created_at,
+              updated_at: user.updated_at,
+            }))
+            .sort((a, b) => sortArray(a, b, _sort as string, _order as string)),
+          filters
+        )
       );
     } else {
       return res.status(500).json({ message: "Invalid credentials!" });
@@ -102,7 +61,7 @@ export const getUsers = async (req: NextApiRequest, res: NextApiResponse, token:
 export const createUser = async (req: NextApiRequest, res: NextApiResponse, token: string) => {
   const { name, email, password, department_id, role_id } = req.body;
 
-  const body: IUserCreate = {
+  const body: FrontEndUserCreate = {
     name,
     email,
     password,

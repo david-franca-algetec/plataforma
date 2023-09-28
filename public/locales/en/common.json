@@ -170,13 +170,37 @@
       "show": "Show Institution"
     }
   },
+  "demands": {
+    "demands": "Demands",
+    "fields": {
+      "experiment_id": "Id",
+      "experiment_name": "Experiment Name",
+      "institution_name": "Institution Name",
+      "tags": "Tags",
+      "status": "Status",
+      "creator_name": "Creator",
+      "deadline": "Deadline",
+      "scripting": "Scripting",
+      "modeling": "Modeling",
+      "coding": "Coding",
+      "testing": "Testing",
+      "ualab": "UALab",
+      "designing": "Design"
+    },
+    "titles": {
+      "create": "Create Demand",
+      "edit": "Edit Demand",
+      "list": "Demands",
+      "show": "Show Demand"
+    }
+  },
   "documentTitle": {
     "default": "Algetec",
     "suffix": " | platform",
     "institutions": {
       "list": "Institutions | Algetec",
-      "show": "#{{id}} Show Instituição | Algetec",
-      "edit": "#{{id}} Edit Instituição | Algetec",
+      "show": "#{{id}} Show Institution | Algetec",
+      "edit": "#{{id}} Edit Institution | Algetec",
       "create": "Create Institution | Algetec",
       "clone": "#{{id}} Clone Institution | Algetec"
     },
@@ -186,6 +210,13 @@
       "edit": "#{{id}} Edit User | Algetec",
       "create": "Create User | Algetec",
       "clone": "#{{id}} Clone User | Algetec"
+    },
+    "demands": {
+      "list": "Demands | Algetec",
+      "show": "#{{id}} Show Demand | Algetec",
+      "edit": "#{{id}} Edit Demand | Algetec",
+      "create": "Create Demand | Algetec",
+      "clone": "#{{id}} Clone Demand | Algetec"
     }
   },
   "table": {

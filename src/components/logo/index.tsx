@@ -1,5 +1,5 @@
-import {useColorMode} from "@chakra-ui/react";
-import {Image} from "@chakra-ui/image";
+import { useColorMode } from "@chakra-ui/react";
+import { Image } from "@chakra-ui/image";
 
 export function Logo() {
   const { colorMode } = useColorMode();

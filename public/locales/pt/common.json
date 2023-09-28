@@ -170,6 +170,30 @@
       "show": "Mostrar Instituição"
     }
   },
+  "demands": {
+    "demands": "Entregas",
+    "fields": {
+      "experiment_id": "Id",
+      "experiment_name": "Nome do Experimento",
+      "institution_name": "Nome da Instituição",
+      "tags": "Tags",
+      "status": "Status",
+      "creator_name": "Criador",
+      "deadline": "Prazo",
+      "scripting": "Roteirização",
+      "modeling": "Modelagem",
+      "coding": "Programação",
+      "testing": "Testes",
+      "ualab": "UALab",
+      "designing": "Design"
+    },
+    "titles": {
+      "create": "Criar Entrega",
+      "edit": "Editar Entrega",
+      "list": "Entregas",
+      "show": "Mostrar Entrega"
+    }
+  },
   "documentTitle": {
     "default": "Algetec",
     "suffix": " | plataforma",
@@ -186,6 +210,13 @@
       "edit": "#{{id}} Editar Usuário | Algetec",
       "create": "Criar nova Usuário | Algetec",
       "clone": "#{{id}} Clonar Usuário | Algetec"
+    },
+    "demands": {
+      "list": "Entregas | Algetec",
+      "show": "#{{id}} Mostrar Entrega | Algetec",
+      "edit": "#{{id}} Editar Entrega | Algetec",
+      "create": "Criar nova Entrega | Algetec",
+      "clone": "#{{id}} Clonar Entrega | Algetec"
     }
   },
   "table": {
