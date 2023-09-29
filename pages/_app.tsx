@@ -1,21 +1,24 @@
-import { DevtoolsProvider, DevtoolsPanel } from "@refinedev/devtools";
-import { notificationProvider, RefineThemes, ThemedLayoutV2 } from "@refinedev/chakra-ui";
-import { Refine } from "@refinedev/core";
-import { RefineKbar, RefineKbarProvider } from "@refinedev/kbar";
-import routerProvider, { DocumentTitleHandler, UnsavedChangesNotifier } from "@refinedev/nextjs-router";
-import type { NextPage } from "next";
+import { appWithTranslation, useTranslation } from "next-i18next";
 import { AppProps } from "next/app";
-import { persistQueryClient } from "@tanstack/react-query-persist-client";
-import { createSyncStoragePersister } from "@tanstack/query-sync-storage-persister";
-import { QueryClient } from "@tanstack/react-query";
+import { useState } from "react";
+import { authProvider } from "src/authProvider";
+
 import { ChakraProvider } from "@chakra-ui/react";
 import { Header } from "@components/header";
-import { dataProvider } from "../src/rest-data-provider";
-import { appWithTranslation, useTranslation } from "next-i18next";
-import { authProvider } from "src/authProvider";
-import { IconRocket, IconStar, IconUsers } from "@tabler/icons";
 import { Logo } from "@components/logo";
-import { useState } from "react";
+import { notificationProvider, RefineThemes, ThemedLayoutV2 } from "@refinedev/chakra-ui";
+import { Refine } from "@refinedev/core";
+import { DevtoolsPanel, DevtoolsProvider } from "@refinedev/devtools";
+import { RefineKbar, RefineKbarProvider } from "@refinedev/kbar";
+import routerProvider, { DocumentTitleHandler, UnsavedChangesNotifier } from "@refinedev/nextjs-router";
+import { IconRocket, IconStar, IconUsers } from "@tabler/icons";
+import { createSyncStoragePersister } from "@tanstack/query-sync-storage-persister";
+import { QueryClient } from "@tanstack/react-query";
+import { persistQueryClient } from "@tanstack/react-query-persist-client";
+
+import { dataProvider } from "../src/rest-data-provider";
+
+import type { NextPage } from "next";
 
 export type NextPageWithLayout<P = {}, IP = P> = NextPage<P, IP> & {
   noLayout?: boolean;
@@ -24,10 +27,6 @@ export type NextPageWithLayout<P = {}, IP = P> = NextPage<P, IP> & {
 type AppPropsWithLayout = AppProps & {
   Component: NextPageWithLayout;
 };
-
-// const localStoragePersister = createSyncStoragePersister({
-//   storage: window.localStorage,
-// });
 
 function MyApp({ Component, pageProps }: AppPropsWithLayout) {
   const baseUrl = typeof window !== "undefined" ? window.location.origin : "";

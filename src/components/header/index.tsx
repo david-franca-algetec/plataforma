@@ -1,3 +1,8 @@
+import Link from "next/link";
+import { useRouter } from "next/router";
+import React from "react";
+import { FrontEndUser } from "src/interfaces/user";
+
 import {
   Avatar,
   Box,
@@ -16,13 +21,9 @@ import {
 import { HamburgerMenu, RefineThemedLayoutV2HeaderProps } from "@refinedev/chakra-ui";
 import { useGetIdentity, useGetLocale } from "@refinedev/core";
 import { IconLanguage, IconMoon, IconSun } from "@tabler/icons";
-import Link from "next/link";
-import { useRouter } from "next/router";
-import React from "react";
-import { IUser } from "src/interfaces/user";
 
 export const Header: React.FC<RefineThemedLayoutV2HeaderProps> = ({ sticky }) => {
-  const { data: user } = useGetIdentity<IUser>();
+  const { data: user } = useGetIdentity<FrontEndUser>();
 
   const { colorMode, toggleColorMode } = useColorMode();
 

@@ -174,8 +174,8 @@
     "demands": "Demands",
     "fields": {
       "experiment_id": "Id",
-      "experiment_name": "Experiment Name",
-      "institution_name": "Institution Name",
+      "experiment_name": "Lab",
+      "institution_name": "Institution",
       "tags": "Tags",
       "status": "Status",
       "creator_name": "Creator",

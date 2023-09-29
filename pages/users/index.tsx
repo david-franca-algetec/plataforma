@@ -1,26 +1,25 @@
-import React, { useMemo, useState } from "react";
 import { GetServerSideProps } from "next";
-import { authProvider } from "src/authProvider";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
-import { HttpError, useExport, useList, useModal, useSelect, useTranslate } from "@refinedev/core";
-import { ColumnDef } from "@tanstack/react-table";
+import { useMemo } from "react";
+import { authProvider } from "src/authProvider";
+
+import { HStack, Select } from "@chakra-ui/react";
+import { FilterElementProps } from "@components/table/ColumnFilter";
+import { TableChakra } from "@components/table/Table";
 import {
-  EditButton,
-  ShowButton,
-  DeleteButton,
-  EmailField,
-  DateField,
-  List,
-  ExportButton,
   CreateButton,
+  DateField,
+  DeleteButton,
+  EditButton,
+  EmailField,
+  ExportButton,
+  List,
+  ShowButton,
   TagField,
   TextField,
 } from "@refinedev/chakra-ui";
-import { HStack, Select } from "@chakra-ui/react";
-import { TableChakra } from "@components/table/Table";
-import { FilterElementProps } from "@components/table/ColumnFilter";
-import { Modal } from "@components/modal";
-import { History } from "@components/history";
+import { useExport, useSelect, useTranslate } from "@refinedev/core";
+import { ColumnDef } from "@tanstack/react-table";
 
 type IUser = {
   id: number;
@@ -153,10 +152,6 @@ export default function UsersList() {
     [translate, rolesOptions, departmentsOptions]
   );
 
-  const { data: usersData } = useList<IUser[], HttpError>({
-    resource: "users",
-  });
-
   const { triggerExport, isLoading: exportLoading } = useExport<IUser>({
     mapData: (item) => {
       return {
@@ -169,7 +164,7 @@ export default function UsersList() {
         [`${translate("users.fields.updated_at").replace(" ", "_")}`]: item.updated_at,
       };
     },
-    pageSize: 10,
+    pageSize: 50,
     maxItemCount: 50,
   });
 

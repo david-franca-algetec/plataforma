@@ -1,12 +1,12 @@
-import { Table, TableContainer, Tbody, Th, Thead, Tr, Td, HStack } from "@chakra-ui/react";
-import React from "react";
-import { ColumnSorter } from "./ColumnSorter";
-import { ColumnFilter } from "./ColumnFilter";
-import { useTable } from "@refinedev/react-table";
-import { ColumnDef, flexRender } from "@tanstack/react-table";
+import { HStack, Table, TableContainer, Tbody, Td, Th, Thead, Tr } from "@chakra-ui/react";
 import { Pagination } from "@components/pagination";
 import { TextField } from "@refinedev/chakra-ui";
 import { HttpError } from "@refinedev/core";
+import { useTable } from "@refinedev/react-table";
+import { ColumnDef, flexRender } from "@tanstack/react-table";
+
+import { ColumnFilter } from "./ColumnFilter";
+import { ColumnSorter } from "./ColumnSorter";
 
 type TableChakraProps<D extends object> = {
   columns: ColumnDef<D>[];
@@ -25,6 +25,18 @@ export function TableChakra<D extends object>({ columns }: TableChakraProps<D>) 
     },
   } = useTable<D, HttpError>({
     columns,
+    enableColumnPinning: true,
+    initialState: {
+      columnPinning: {
+        right: ["actions"],
+        left: ["name"],
+      },
+    },
+    refineCoreProps: {
+      pagination: {
+        pageSize: 100,
+      },
+    },
   });
 
   setOptions((prev) => ({

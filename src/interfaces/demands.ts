@@ -173,3 +173,20 @@ export interface DemandChecklistParameter {
   order?: number;
   demand_checklist_parameters: any[];
 }
+
+export interface FrontEndDemand {
+  id: number;
+  experiment_id: number;
+  experiment_name: string;
+  institution_name: string;
+  tags: string[];
+  status: DemandStatus;
+  creator_name: string;
+  deadline: string;
+  scripting: string;
+  modeling: string;
+  coding: string;
+  testing: string;
+  ualab: string;
+  designing: string;
+}

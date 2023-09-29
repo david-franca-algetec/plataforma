@@ -1,9 +1,9 @@
 import { GetServerSideProps } from "next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
-import React, { FC, useMemo } from "react";
+import { FC, useMemo } from "react";
+import { IInstitution } from "src/interfaces/institutions";
 
 import { Checkbox, HStack } from "@chakra-ui/react";
-
 import { TableChakra } from "@components/table/Table";
 import {
   CreateButton,
@@ -14,11 +14,10 @@ import {
   List,
   ShowButton,
 } from "@refinedev/chakra-ui";
-import { HttpError, IResourceComponentsProps, useExport, useList, useTranslate } from "@refinedev/core";
+import { IResourceComponentsProps, useExport, useTranslate } from "@refinedev/core";
 import { ColumnDef } from "@tanstack/react-table";
 
 import { authProvider } from "../../src/authProvider";
-import { IInstitution } from "src/interfaces/institutions";
 
 const InstitutionsList: FC<IResourceComponentsProps> = () => {
   const translate = useTranslate();
@@ -99,10 +98,6 @@ const InstitutionsList: FC<IResourceComponentsProps> = () => {
     [translate]
   );
 
-  const { data: institutionsData } = useList<IInstitution[], HttpError>({
-    resource: "institutions",
-  });
-
   const { triggerExport, isLoading: exportLoading } = useExport<IInstitution>({
     mapData: (item) => {
       return {
@@ -112,7 +107,7 @@ const InstitutionsList: FC<IResourceComponentsProps> = () => {
         [`${translate("institutions.fields.updated_at").replace(" ", "_")}`]: item.updated_at,
       };
     },
-    pageSize: 10,
+    pageSize: 50,
     maxItemCount: 50,
   });
 
@@ -125,7 +120,7 @@ const InstitutionsList: FC<IResourceComponentsProps> = () => {
         </>
       }
     >
-      <TableChakra columns={columns} data={institutionsData} />
+      <TableChakra columns={columns} />
     </List>
   );
 };

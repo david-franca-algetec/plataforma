@@ -1,6 +1,6 @@
 {
   "i18n-ally.localesPaths": ["public/locales"],
-  "cSpell.words": ["david", "ualab"],
+  "cSpell.words": ["david", "refinedev", "tanstack", "ualab"],
   "workbench.colorCustomizations": {
     "activityBar.activeBackground": "#2fcefa",
     "activityBar.background": "#2fcefa",

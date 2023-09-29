@@ -1,10 +1,11 @@
 import { GetServerSideProps } from "next";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import React, { useMemo } from "react";
 import { authProvider } from "src/authProvider";
-import { serverSideTranslations } from "next-i18next/serverSideTranslations";
-import { useExport, useTranslate } from "@refinedev/core";
-import { ColumnDef } from "@tanstack/react-table";
-import { HStack } from "@chakra-ui/react";
+import { FrontEndDemand } from "src/interfaces/demands";
+
+import { HStack, Wrap, WrapItem } from "@chakra-ui/react";
+import { TableChakra } from "@components/table/Table";
 import {
   CreateButton,
   DateField,
@@ -14,13 +15,27 @@ import {
   List,
   ShowButton,
   TagField,
+  TextField,
   UrlField,
 } from "@refinedev/chakra-ui";
-import { TableChakra } from "@components/table/Table";
+import { useExport, useTranslate } from "@refinedev/core";
+import { ColumnDef, createColumnHelper } from "@tanstack/react-table";
 
 export default function index() {
   const translate = useTranslate();
-  const columns = useMemo<ColumnDef<any>[]>(
+  const columnHelper = createColumnHelper<FrontEndDemand>();
+
+  const columns2 = [
+    columnHelper.accessor("experiment_id", {
+      header: translate("demands.fields.experiment_id"),
+      cell: function render({ getValue }) {
+        const value = getValue<string>();
+        return <UrlField value={value} href={`/labs/show/${value}`} target="_blank" />;
+      },
+    }),
+  ];
+
+  const columns = useMemo<ColumnDef<FrontEndDemand>[]>(
     () => [
       {
         id: "experiment_id",
@@ -38,7 +53,7 @@ export default function index() {
         cell: function render({ getValue, row }) {
           const id = row.original.id;
           const value = getValue<string>();
-          return <UrlField value={value} href={`/demands/show/${id}`} target="_blank" />;
+          return <UrlField value={value} href={`/demands/show/${id}`} target="_blank" noOfLines={1} />;
         },
       },
       {
@@ -52,11 +67,13 @@ export default function index() {
         header: translate("demands.fields.tags"),
         cell: function render({ getValue }) {
           return (
-            <HStack>
+            <Wrap width={200}>
               {getValue<string[]>()?.map((item, index) => (
-                <TagField value={item} key={index} />
+                <WrapItem>
+                  <TagField value={item} key={index} />
+                </WrapItem>
               ))}
-            </HStack>
+            </Wrap>
           );
         },
       },
@@ -69,6 +86,9 @@ export default function index() {
         id: "creator_name",
         accessorKey: "creator_name",
         header: translate("demands.fields.creator_name"),
+        cell: function render({ getValue }) {
+          return <TextField noOfLines={1} value={getValue<string>()} width={150} />;
+        },
       },
       {
         id: "deadline",
@@ -82,26 +102,41 @@ export default function index() {
         id: "scripting",
         accessorKey: "scripting",
         header: translate("demands.fields.scripting"),
+        cell: function render({ getValue }) {
+          return <TextField noOfLines={1} value={getValue<string>()} width={150} />;
+        },
       },
       {
         id: "modeling",
         accessorKey: "modeling",
         header: translate("demands.fields.modeling"),
+        cell: function render({ getValue }) {
+          return <TextField noOfLines={1} value={getValue<string>()} width={150} />;
+        },
       },
       {
         id: "coding",
         accessorKey: "coding",
         header: translate("demands.fields.coding"),
+        cell: function render({ getValue }) {
+          return <TextField noOfLines={1} value={getValue<string>()} width={150} />;
+        },
       },
       {
         id: "testing",
         accessorKey: "testing",
         header: translate("demands.fields.testing"),
+        cell: function render({ getValue }) {
+          return <TextField noOfLines={1} value={getValue<string>()} width={150} />;
+        },
       },
       {
         id: "ualab",
         accessorKey: "ualab",
         header: translate("demands.fields.ualab"),
+        cell: function render({ getValue }) {
+          return <TextField noOfLines={1} value={getValue<string>()} width={150} />;
+        },
       },
       {
         id: "designing",
@@ -138,7 +173,7 @@ export default function index() {
         [`${translate("users.fields.updated_at").replace(" ", "_")}`]: item.updated_at,
       };
     },
-    pageSize: 10,
+    pageSize: 50,
     maxItemCount: 50,
   });
 

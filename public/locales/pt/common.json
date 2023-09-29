@@ -174,8 +174,8 @@
     "demands": "Entregas",
     "fields": {
       "experiment_id": "Id",
-      "experiment_name": "Nome do Experimento",
-      "institution_name": "Nome da Instituição",
+      "experiment_name": "Laboratório",
+      "institution_name": "Instituição",
       "tags": "Tags",
       "status": "Status",
       "creator_name": "Criador",

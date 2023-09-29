@@ -1,10 +1,12 @@
-import { AuthBindings } from "@refinedev/core";
 import axios from "axios";
+import { GetServerSidePropsContext } from "next";
 import nookies from "nookies";
 import { ResponseLoginData } from "pages/api/login";
+
+import { AuthBindings } from "@refinedev/core";
+
+import { FrontEndUser } from "./interfaces/user";
 import { axiosInstance } from "./rest-data-provider/utils";
-import { GetServerSidePropsContext } from "next";
-import { IUser } from "./interfaces/user";
 
 /**
  * Authentication provider object that implements the AuthBindings interface.
@@ -125,7 +127,7 @@ export const authProvider: AuthBindings = {
   getPermissions: async () => {
     const auth = nookies.get().auth;
     if (auth) {
-      const parsedUser: IUser = JSON.parse(auth);
+      const parsedUser: FrontEndUser = JSON.parse(auth);
       return parsedUser.role_id;
     }
     return null;
@@ -133,7 +135,7 @@ export const authProvider: AuthBindings = {
   getIdentity: async () => {
     const auth = nookies.get().auth;
     if (auth) {
-      const parsedUser: IUser = JSON.parse(auth);
+      const parsedUser: FrontEndUser = JSON.parse(auth);
       return parsedUser;
     }
     return null;
