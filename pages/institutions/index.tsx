@@ -95,7 +95,7 @@ const InstitutionsList: FC<IResourceComponentsProps> = () => {
         },
       },
     ],
-    [translate]
+    [translate],
   );
 
   const { triggerExport, isLoading: exportLoading } = useExport<IInstitution>({

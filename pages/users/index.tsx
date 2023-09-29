@@ -149,7 +149,7 @@ export default function UsersList() {
         },
       },
     ],
-    [translate, rolesOptions, departmentsOptions]
+    [translate, rolesOptions, departmentsOptions],
   );
 
   const { triggerExport, isLoading: exportLoading } = useExport<IUser>({

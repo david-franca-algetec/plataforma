@@ -158,7 +158,7 @@ export default function index() {
         },
       },
     ],
-    [translate]
+    [translate],
   );
 
   const { triggerExport, isLoading: exportLoading } = useExport({
